@@ -52,14 +52,13 @@ class GameRunner
       for j in board.first.size
         if is_player?(@@game_state.board[i][j])
           if surrounded?(i, j)
-            # surrounder = get_surrounder(i, j)
-            #          if surrounder == 
-            #          @@game_state.board[i][j] = get_surrounder(i, j)
-            #          takes << Move.new(i, j)
+            takes << Move.new(i, j)
           end
         end
       end
     end
+    
+    takes
   end
   
   def is_player?(piece)
