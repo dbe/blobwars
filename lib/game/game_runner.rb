@@ -22,10 +22,10 @@ class GameRunner
       
         # Handle any takes
         handle_takes!
+      end while food
       
-        # Rotate turn
-        @@game_state.rotate_turn!
-      end while food        # while the 
+      # Rotate turn
+      @@game_state.rotate_turn!
     end
   end
   
