@@ -1,16 +1,20 @@
 class GameRunner
   def self.play(players, height, width)
-    game_state = GameState.new(players, height, width)
+    @@game_state = GameState.new(players, height, width)
     
-    while !game_over?(game) do
+    while !@@game_state.over do
       # Decide whose turn it is
-      game_state.rotate_turn! unless game_state.player_ate?
-      player = game_state.get_next_player
+      @@game_state.rotate_turn! unless game_state.player_ate?
+      player = @@game_state.get_next_player
       
       # Get client move
-      move = player.get_move(game_state)
+      move = player.get_move(@@game_state)  
       
-      # Execute client move
+      # Validate move
+      if valid?(move)
+        # Execute move
+        @@game_state.board[y][x] = turn   # players ids on board are position in client array
+      end
     end
   end
   
@@ -19,6 +23,10 @@ class GameRunner
   def game_over?(game)
     # TODO
     true
+  end
+  
+  def valid?(move)
+    @@game_state.board[move.y][move.x] == GameConstants::BLANK
   end
   
 end
