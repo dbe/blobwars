@@ -50,11 +50,7 @@ class GameRunner
     takes = []
     for i in board.size
       for j in board.first.size
-        if is_player?(@@game_state.board[i][j])
-          if surrounded?(i, j)
-            takes << Move.new(i, j)
-          end
-        end
+        takes << Move.new(i, j) if is_player?(@@game_state.board[i][j]) && surrounded?(i, j)
       end
     end
     
@@ -66,8 +62,6 @@ class GameRunner
   end
   
   def surrounded?(x, y)
-  end
-  
-  def get_surrounder(x, y)
+    # TODO
   end
 end
