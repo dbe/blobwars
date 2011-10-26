@@ -1,6 +1,10 @@
 class GameRunner
   def self.play(players, height, width)
     @@game_state = GameState.new(players, height, width)
+    @@game_history = []
+    
+    # Put players on board
+    # TODO
     
     while !@@game_state.over do
       # Get the player whose turn it is
@@ -11,7 +15,9 @@ class GameRunner
         food = false
         
         # Get client move
-        move = player.get_move(@@game_state)  
+        move = player.get_move(@@game_state)
+        
+        @@game_history << []
       
         # Validate move
         break if !valid?(move)
@@ -27,6 +33,8 @@ class GameRunner
       # Rotate turn
       @@game_state.rotate_turn!
     end
+    
+    # Write game to db
   end
   
   private
@@ -38,6 +46,7 @@ class GameRunner
   
   def valid?(move)
     @@game_state.board[move.x][move.y] == GameConstants::BLANK
+    # TODO: add clause about needing to be adj to an existing, same-colored piece
   end
   
   def handle_takes!
