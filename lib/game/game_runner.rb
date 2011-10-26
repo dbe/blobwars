@@ -14,11 +14,11 @@ class GameRunner
         move = player.get_move(@@game_state)  
       
         # Validate move
-        next if !valid?(move)
+        break if !valid?(move)
       
         # Execute move
-        food = true if @@game_state.board[x][y] == GameConstants::FOOD
-        @@game_state.board[x][y] = turn   # players ids on board are position in client array
+        food = true if @@game_state.board[move.x][move.y] == GameConstants::FOOD
+        @@game_state.board[move.x][move.y] = @@game_state.turn   # players ids on board are position in client array
       
         # Handle any takes
         handle_takes!
@@ -47,12 +47,28 @@ class GameRunner
   end
   
   def find_takes!
+    takes = []
     for i in board.size
       for j in board.first.size
-        if player? @@game_state.board[i][j]
-          
+        if is_player?(@@game_state.board[i][j])
+          if surrounded?(i, j)
+            # surrounder = get_surrounder(i, j)
+            #          if surrounder == 
+            #          @@game_state.board[i][j] = get_surrounder(i, j)
+            #          takes << Move.new(i, j)
+          end
         end
       end
     end
+  end
+  
+  def is_player?(piece)
+    piece >= 0
+  end
+  
+  def surrounded?(x, y)
+  end
+  
+  def get_surrounder(x, y)
   end
 end
