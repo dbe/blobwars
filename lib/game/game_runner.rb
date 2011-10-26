@@ -17,8 +17,8 @@ class GameRunner
         next if !valid?(move)
       
         # Execute move
-        food = true if @@game_state.board[y][x] == GameConstants::FOOD
-        @@game_state.board[y][x] = turn   # players ids on board are position in client array
+        food = true if @@game_state.board[x][y] == GameConstants::FOOD
+        @@game_state.board[x][y] = turn   # players ids on board are position in client array
       
         # Handle any takes
         handle_takes!
@@ -37,10 +37,22 @@ class GameRunner
   end
   
   def valid?(move)
-    @@game_state.board[move.y][move.x] == GameConstants::BLANK
+    @@game_state.board[move.x][move.y] == GameConstants::BLANK
   end
   
   def handle_takes!
-    # TODO
+    begin
+      takes = find_takes!
+    end while taken
+  end
+  
+  def find_takes!
+    for i in board.size
+      for j in board.first.size
+        if player? @@game_state.board[i][j]
+          
+        end
+      end
+    end
   end
 end
