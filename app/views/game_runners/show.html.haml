@@ -6,6 +6,9 @@
 %p
   %b Game clients:
   = @game_runner.game_clients
+  %p
+    %b Dimensions:
+    = "#{@game_runner.width}, #{@game_runner.height}"
 = button_to "Play Game!", play_game_runner_path(@game_runner), :method => :post
 
 /= link_to 'Edit', edit_game_runner_path(@game_runner)
