@@ -2,7 +2,6 @@ class GameState
   def initialize(players, height, width)
     @players = players        # the client array
     @turn = 0                 # index into clients array
-    @player_ate = false       # whether or not blob ate this turn
     @over = false
     
     @board = []
@@ -19,7 +18,7 @@ class GameState
   attr_accessor :board, :turn, :over
   
   def rotate_turn!
-    @turn = (@turn + 1) % @num_players
+    @turn = (@turn + 1) % @players.size
   end
   
   def get_next_player

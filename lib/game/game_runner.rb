@@ -17,17 +17,17 @@ class GameRunner
         # Get client move
         move = player.get_move(@@game_state)
         
-        @@game_history << []
+        @@game_history << Move.new(move.x, move.y)
       
         # Validate move
-        break if !valid?(move)
+        break if !GameUtils.valid?(@@game_state, move)
       
         # Execute move
         food = true if @@game_state.board[move.x][move.y] == GameConstants::FOOD
         @@game_state.board[move.x][move.y] = @@game_state.turn   # players ids on board are position in client array
       
         # Handle any takes
-        handle_takes!
+        GameUtils.handle_takes!(@@game_state)
       end while food
       
       # Rotate turn
@@ -35,42 +35,7 @@ class GameRunner
     end
     
     # Write game to db
-  end
-  
-  private
-  
-  def game_over?(game)
-    # TODO
-    true
-  end
-  
-  def valid?(move)
-    @@game_state.board[move.x][move.y] == GameConstants::BLANK
-    # TODO: add clause about needing to be adj to an existing, same-colored piece
-  end
-  
-  def handle_takes!
-    begin
-      takes = find_takes!
-    end while taken
-  end
-  
-  def find_takes!
-    takes = []
-    for i in board.size
-      for j in board.first.size
-        takes << Move.new(i, j) if is_player?(@@game_state.board[i][j]) && surrounded?(i, j)
-      end
-    end
-    
-    takes
-  end
-  
-  def is_player?(piece)
-    piece >= 0
-  end
-  
-  def surrounded?(x, y)
     # TODO
   end
+  
 end
