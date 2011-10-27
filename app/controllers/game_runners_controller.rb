@@ -95,9 +95,10 @@ class GameRunnersController < ApplicationController
       Object.const_get(c.classify).new(i += 1)
     end
     
-    
     history = game_runner_instance.play(*clients)
-    history_record = GameHistory.create(:move_history => history.deltas, :winner => history.winner)
-    redirect_to game_history_show_path(history_record)
+    history_record = runner.game_histories.create(:move_history => history[:deltas].map do |delta|
+      {'x' => delta.x, 'y' => delta.y, 'team' => delta.team}
+    end, :winner => history[:winner])
+    redirect_to history_record
   end
 end
