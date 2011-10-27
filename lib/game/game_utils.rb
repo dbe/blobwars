@@ -6,12 +6,12 @@ module GameUtils
   
   def handle_takes!(game_state)
     begin
-      takes = find_takes!
+      takes = find_takes(game_state)
       # TODO process_takes!(takes)
     end while taken
   end
   
-  def find_takes!(game_state)
+  def find_takes(game_state)
     takes = []
     for i in board.size
       for j in board.first.size
