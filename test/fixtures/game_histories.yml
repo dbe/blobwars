@@ -1,12 +1,1506 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  move_history: MyText
-  winner: MyString
-
-two:
-  move_history: MyText
-  winner: MyString
+history: 
+  winner: danny
+  game_manager_id: 1
+  move_history: 
+  - x: 159
+    y: 26
+    team: 2
+  - x: 48
+    y: 50
+    team: 3
+  - x: 47
+    y: 50
+    team: 2
+  - x: 13
+    y: 148
+    team: 3
+  - x: 4
+    y: 70
+    team: 2
+  - x: 23
+    y: 195
+    team: 3
+  - x: 112
+    y: 60
+    team: 2
+  - x: 132
+    y: 184
+    team: 3
+  - x: 66
+    y: 84
+    team: 2
+  - x: 197
+    y: 64
+    team: 3
+  - x: 77
+    y: 59
+    team: 2
+  - x: 61
+    y: 67
+    team: 3
+  - x: 12
+    y: 68
+    team: 2
+  - x: 132
+    y: 42
+    team: 3
+  - x: 161
+    y: 12
+    team: 2
+  - x: 101
+    y: 61
+    team: 3
+  - x: 171
+    y: 181
+    team: 2
+  - x: 124
+    y: 153
+    team: 3
+  - x: 169
+    y: 36
+    team: 2
+  - x: 161
+    y: 96
+    team: 3
+  - x: 173
+    y: 62
+    team: 2
+  - x: 145
+    y: 25
+    team: 3
+  - x: 184
+    y: 17
+    team: 2
+  - x: 162
+    y: 67
+    team: 3
+  - x: 114
+    y: 107
+    team: 2
+  - x: 88
+    y: 83
+    team: 3
+  - x: 127
+    y: 162
+    team: 2
+  - x: 99
+    y: 169
+    team: 3
+  - x: 126
+    y: 147
+    team: 2
+  - x: 19
+    y: 168
+    team: 3
+  - x: 181
+    y: 6
+    team: 2
+  - x: 43
+    y: 152
+    team: 3
+  - x: 130
+    y: 127
+    team: 2
+  - x: 100
+    y: 78
+    team: 3
+  - x: 148
+    y: 133
+    team: 2
+  - x: 162
+    y: 135
+    team: 3
+  - x: 134
+    y: 124
+    team: 2
+  - x: 111
+    y: 105
+    team: 3
+  - x: 110
+    y: 126
+    team: 2
+  - x: 76
+    y: 69
+    team: 3
+  - x: 159
+    y: 86
+    team: 2
+  - x: 164
+    y: 83
+    team: 3
+  - x: 55
+    y: 67
+    team: 2
+  - x: 18
+    y: 29
+    team: 3
+  - x: 149
+    y: 61
+    team: 2
+  - x: 18
+    y: 34
+    team: 3
+  - x: 93
+    y: 180
+    team: 2
+  - x: 178
+    y: 33
+    team: 3
+  - x: 53
+    y: 168
+    team: 2
+  - x: 176
+    y: 174
+    team: 3
+  - x: 151
+    y: 107
+    team: 2
+  - x: 167
+    y: 116
+    team: 3
+  - x: 192
+    y: 173
+    team: 2
+  - x: 63
+    y: 148
+    team: 3
+  - x: 122
+    y: 141
+    team: 2
+  - x: 186
+    y: 91
+    team: 3
+  - x: 96
+    y: 95
+    team: 2
+  - x: 178
+    y: 2
+    team: 3
+  - x: 44
+    y: 7
+    team: 2
+  - x: 44
+    y: 102
+    team: 3
+  - x: 22
+    y: 141
+    team: 2
+  - x: 44
+    y: 27
+    team: 3
+  - x: 16
+    y: 110
+    team: 2
+  - x: 199
+    y: 130
+    team: 3
+  - x: 128
+    y: 183
+    team: 2
+  - x: 36
+    y: 162
+    team: 3
+  - x: 80
+    y: 48
+    team: 2
+  - x: 131
+    y: 58
+    team: 3
+  - x: 122
+    y: 47
+    team: 2
+  - x: 63
+    y: 86
+    team: 3
+  - x: 106
+    y: 72
+    team: 2
+  - x: 60
+    y: 147
+    team: 3
+  - x: 191
+    y: 118
+    team: 2
+  - x: 43
+    y: 41
+    team: 3
+  - x: 61
+    y: 134
+    team: 2
+  - x: 96
+    y: 178
+    team: 3
+  - x: 58
+    y: 88
+    team: 2
+  - x: 93
+    y: 121
+    team: 3
+  - x: 127
+    y: 31
+    team: 2
+  - x: 189
+    y: 120
+    team: 3
+  - x: 183
+    y: 198
+    team: 2
+  - x: 175
+    y: 166
+    team: 3
+  - x: 108
+    y: 9
+    team: 2
+  - x: 150
+    y: 41
+    team: 3
+  - x: 66
+    y: 105
+    team: 2
+  - x: 128
+    y: 124
+    team: 3
+  - x: 31
+    y: 16
+    team: 2
+  - x: 142
+    y: 15
+    team: 3
+  - x: 2
+    y: 169
+    team: 2
+  - x: 9
+    y: 75
+    team: 3
+  - x: 184
+    y: 118
+    team: 2
+  - x: 167
+    y: 153
+    team: 3
+  - x: 124
+    y: 180
+    team: 2
+  - x: 136
+    y: 63
+    team: 3
+  - x: 87
+    y: 9
+    team: 2
+  - x: 40
+    y: 130
+    team: 3
+  - x: 189
+    y: 64
+    team: 2
+  - x: 48
+    y: 155
+    team: 3
+  - x: 192
+    y: 63
+    team: 2
+  - x: 173
+    y: 47
+    team: 3
+  - x: 143
+    y: 50
+    team: 2
+  - x: 144
+    y: 53
+    team: 3
+  - x: 186
+    y: 131
+    team: 2
+  - x: 159
+    y: 1
+    team: 3
+  - x: 65
+    y: 34
+    team: 2
+  - x: 179
+    y: 123
+    team: 3
+  - x: 196
+    y: 192
+    team: 2
+  - x: 131
+    y: 118
+    team: 3
+  - x: 15
+    y: 181
+    team: 2
+  - x: 42
+    y: 112
+    team: 3
+  - x: 11
+    y: 113
+    team: 2
+  - x: 82
+    y: 139
+    team: 3
+  - x: 196
+    y: 74
+    team: 2
+  - x: 4
+    y: 198
+    team: 3
+  - x: 62
+    y: 113
+    team: 2
+  - x: 40
+    y: 153
+    team: 3
+  - x: 151
+    y: 60
+    team: 2
+  - x: 191
+    y: 129
+    team: 3
+  - x: 10
+    y: 29
+    team: 2
+  - x: 1
+    y: 193
+    team: 3
+  - x: 112
+    y: 48
+    team: 2
+  - x: 168
+    y: 158
+    team: 3
+  - x: 193
+    y: 172
+    team: 2
+  - x: 52
+    y: 90
+    team: 3
+  - x: 20
+    y: 21
+    team: 2
+  - x: 133
+    y: 82
+    team: 3
+  - x: 124
+    y: 48
+    team: 2
+  - x: 199
+    y: 77
+    team: 3
+  - x: 59
+    y: 44
+    team: 2
+  - x: 7
+    y: 7
+    team: 3
+  - x: 37
+    y: 164
+    team: 2
+  - x: 197
+    y: 10
+    team: 3
+  - x: 118
+    y: 53
+    team: 2
+  - x: 101
+    y: 98
+    team: 3
+  - x: 151
+    y: 93
+    team: 2
+  - x: 186
+    y: 93
+    team: 3
+  - x: 76
+    y: 62
+    team: 2
+  - x: 46
+    y: 71
+    team: 3
+  - x: 158
+    y: 38
+    team: 2
+  - x: 141
+    y: 168
+    team: 3
+  - x: 149
+    y: 153
+    team: 2
+  - x: 145
+    y: 133
+    team: 3
+  - x: 108
+    y: 185
+    team: 2
+  - x: 111
+    y: 149
+    team: 3
+  - x: 130
+    y: 189
+    team: 2
+  - x: 160
+    y: 119
+    team: 3
+  - x: 9
+    y: 48
+    team: 2
+  - x: 181
+    y: 151
+    team: 3
+  - x: 70
+    y: 70
+    team: 2
+  - x: 75
+    y: 5
+    team: 3
+  - x: 19
+    y: 96
+    team: 2
+  - x: 47
+    y: 93
+    team: 3
+  - x: 189
+    y: 159
+    team: 2
+  - x: 46
+    y: 181
+    team: 3
+  - x: 176
+    y: 124
+    team: 2
+  - x: 194
+    y: 186
+    team: 3
+  - x: 165
+    y: 23
+    team: 2
+  - x: 169
+    y: 190
+    team: 3
+  - x: 110
+    y: 58
+    team: 2
+  - x: 157
+    y: 131
+    team: 3
+  - x: 190
+    y: 34
+    team: 2
+  - x: 149
+    y: 79
+    team: 3
+  - x: 88
+    y: 131
+    team: 2
+  - x: 176
+    y: 169
+    team: 3
+  - x: 177
+    y: 191
+    team: 2
+  - x: 191
+    y: 103
+    team: 3
+  - x: 7
+    y: 185
+    team: 2
+  - x: 66
+    y: 191
+    team: 3
+  - x: 153
+    y: 137
+    team: 2
+  - x: 34
+    y: 74
+    team: 3
+  - x: 165
+    y: 11
+    team: 2
+  - x: 88
+    y: 199
+    team: 3
+  - x: 171
+    y: 40
+    team: 2
+  - x: 136
+    y: 4
+    team: 3
+  - x: 154
+    y: 94
+    team: 2
+  - x: 146
+    y: 65
+    team: 3
+  - x: 92
+    y: 128
+    team: 2
+  - x: 128
+    y: 16
+    team: 3
+  - x: 51
+    y: 118
+    team: 2
+  - x: 63
+    y: 54
+    team: 3
+  - x: 120
+    y: 45
+    team: 2
+  - x: 36
+    y: 191
+    team: 3
+  - x: 141
+    y: 195
+    team: 2
+  - x: 81
+    y: 194
+    team: 3
+  - x: 17
+    y: 11
+    team: 2
+  - x: 52
+    y: 84
+    team: 3
+  - x: 18
+    y: 91
+    team: 2
+  - x: 20
+    y: 102
+    team: 3
+  - x: 154
+    y: 73
+    team: 2
+  - x: 100
+    y: 64
+    team: 3
+  - x: 43
+    y: 41
+    team: 2
+  - x: 123
+    y: 105
+    team: 3
+  - x: 43
+    y: 179
+    team: 2
+  - x: 156
+    y: 129
+    team: 3
+  - x: 131
+    y: 120
+    team: 2
+  - x: 65
+    y: 133
+    team: 3
+  - x: 7
+    y: 160
+    team: 2
+  - x: 177
+    y: 60
+    team: 3
+  - x: 148
+    y: 56
+    team: 2
+  - x: 174
+    y: 183
+    team: 3
+  - x: 159
+    y: 83
+    team: 2
+  - x: 74
+    y: 108
+    team: 3
+  - x: 57
+    y: 176
+    team: 2
+  - x: 160
+    y: 166
+    team: 3
+  - x: 114
+    y: 174
+    team: 2
+  - x: 169
+    y: 139
+    team: 3
+  - x: 141
+    y: 90
+    team: 2
+  - x: 120
+    y: 5
+    team: 3
+  - x: 84
+    y: 37
+    team: 2
+  - x: 9
+    y: 43
+    team: 3
+  - x: 181
+    y: 105
+    team: 2
+  - x: 194
+    y: 196
+    team: 3
+  - x: 40
+    y: 95
+    team: 2
+  - x: 108
+    y: 90
+    team: 3
+  - x: 6
+    y: 17
+    team: 2
+  - x: 68
+    y: 44
+    team: 3
+  - x: 113
+    y: 113
+    team: 2
+  - x: 87
+    y: 145
+    team: 3
+  - x: 62
+    y: 149
+    team: 2
+  - x: 154
+    y: 29
+    team: 3
+  - x: 188
+    y: 52
+    team: 2
+  - x: 175
+    y: 123
+    team: 3
+  - x: 51
+    y: 105
+    team: 2
+  - x: 141
+    y: 167
+    team: 3
+  - x: 151
+    y: 112
+    team: 2
+  - x: 178
+    y: 76
+    team: 3
+  - x: 37
+    y: 12
+    team: 2
+  - x: 93
+    y: 111
+    team: 3
+  - x: 94
+    y: 93
+    team: 2
+  - x: 173
+    y: 184
+    team: 3
+  - x: 179
+    y: 33
+    team: 2
+  - x: 75
+    y: 122
+    team: 3
+  - x: 98
+    y: 86
+    team: 2
+  - x: 64
+    y: 46
+    team: 3
+  - x: 190
+    y: 82
+    team: 2
+  - x: 18
+    y: 44
+    team: 3
+  - x: 148
+    y: 154
+    team: 2
+  - x: 13
+    y: 162
+    team: 3
+  - x: 175
+    y: 167
+    team: 2
+  - x: 72
+    y: 59
+    team: 3
+  - x: 53
+    y: 114
+    team: 2
+  - x: 145
+    y: 35
+    team: 3
+  - x: 198
+    y: 86
+    team: 2
+  - x: 126
+    y: 122
+    team: 3
+  - x: 108
+    y: 121
+    team: 2
+  - x: 36
+    y: 169
+    team: 3
+  - x: 53
+    y: 84
+    team: 2
+  - x: 19
+    y: 70
+    team: 3
+  - x: 55
+    y: 23
+    team: 2
+  - x: 14
+    y: 132
+    team: 3
+  - x: 113
+    y: 96
+    team: 2
+  - x: 174
+    y: 129
+    team: 3
+  - x: 74
+    y: 22
+    team: 2
+  - x: 97
+    y: 147
+    team: 3
+  - x: 97
+    y: 158
+    team: 2
+  - x: 78
+    y: 81
+    team: 3
+  - x: 99
+    y: 164
+    team: 2
+  - x: 99
+    y: 37
+    team: 3
+  - x: 108
+    y: 138
+    team: 2
+  - x: 187
+    y: 70
+    team: 3
+  - x: 32
+    y: 198
+    team: 2
+  - x: 130
+    y: 90
+    team: 3
+  - x: 152
+    y: 195
+    team: 2
+  - x: 173
+    y: 61
+    team: 3
+  - x: 123
+    y: 48
+    team: 2
+  - x: 50
+    y: 32
+    team: 3
+  - x: 127
+    y: 162
+    team: 2
+  - x: 7
+    y: 100
+    team: 3
+  - x: 73
+    y: 17
+    team: 2
+  - x: 153
+    y: 103
+    team: 3
+  - x: 189
+    y: 17
+    team: 2
+  - x: 197
+    y: 35
+    team: 3
+  - x: 112
+    y: 127
+    team: 2
+  - x: 103
+    y: 186
+    team: 3
+  - x: 26
+    y: 104
+    team: 2
+  - x: 174
+    y: 190
+    team: 3
+  - x: 7
+    y: 188
+    team: 2
+  - x: 186
+    y: 28
+    team: 3
+  - x: 67
+    y: 166
+    team: 2
+  - x: 153
+    y: 193
+    team: 3
+  - x: 157
+    y: 44
+    team: 2
+  - x: 95
+    y: 18
+    team: 3
+  - x: 168
+    y: 139
+    team: 2
+  - x: 186
+    y: 166
+    team: 3
+  - x: 195
+    y: 37
+    team: 2
+  - x: 67
+    y: 94
+    team: 3
+  - x: 107
+    y: 98
+    team: 2
+  - x: 73
+    y: 22
+    team: 3
+  - x: 133
+    y: 184
+    team: 2
+  - x: 136
+    y: 195
+    team: 3
+  - x: 58
+    y: 58
+    team: 2
+  - x: 190
+    y: 144
+    team: 3
+  - x: 156
+    y: 59
+    team: 2
+  - x: 185
+    y: 161
+    team: 3
+  - x: 154
+    y: 132
+    team: 2
+  - x: 67
+    y: 40
+    team: 3
+  - x: 61
+    y: 11
+    team: 2
+  - x: 5
+    y: 83
+    team: 3
+  - x: 89
+    y: 165
+    team: 2
+  - x: 168
+    y: 158
+    team: 3
+  - x: 99
+    y: 185
+    team: 2
+  - x: 131
+    y: 3
+    team: 3
+  - x: 176
+    y: 192
+    team: 2
+  - x: 71
+    y: 52
+    team: 3
+  - x: 149
+    y: 196
+    team: 2
+  - x: 147
+    y: 147
+    team: 3
+  - x: 1
+    y: 51
+    team: 2
+  - x: 86
+    y: 82
+    team: 3
+  - x: 175
+    y: 5
+    team: 2
+  - x: 57
+    y: 137
+    team: 3
+  - x: 120
+    y: 184
+    team: 2
+  - x: 54
+    y: 55
+    team: 3
+  - x: 65
+    y: 111
+    team: 2
+  - x: 108
+    y: 140
+    team: 3
+  - x: 109
+    y: 148
+    team: 2
+  - x: 171
+    y: 196
+    team: 3
+  - x: 80
+    y: 154
+    team: 2
+  - x: 152
+    y: 11
+    team: 3
+  - x: 140
+    y: 50
+    team: 2
+  - x: 150
+    y: 52
+    team: 3
+  - x: 151
+    y: 195
+    team: 2
+  - x: 128
+    y: 93
+    team: 3
+  - x: 158
+    y: 30
+    team: 2
+  - x: 78
+    y: 83
+    team: 3
+  - x: 97
+    y: 32
+    team: 2
+  - x: 129
+    y: 165
+    team: 3
+  - x: 181
+    y: 183
+    team: 2
+  - x: 46
+    y: 134
+    team: 3
+  - x: 113
+    y: 191
+    team: 2
+  - x: 20
+    y: 74
+    team: 3
+  - x: 27
+    y: 17
+    team: 2
+  - x: 90
+    y: 172
+    team: 3
+  - x: 177
+    y: 157
+    team: 2
+  - x: 116
+    y: 86
+    team: 3
+  - x: 42
+    y: 159
+    team: 2
+  - x: 184
+    y: 127
+    team: 3
+  - x: 172
+    y: 78
+    team: 2
+  - x: 157
+    y: 78
+    team: 3
+  - x: 69
+    y: 126
+    team: 2
+  - x: 104
+    y: 78
+    team: 3
+  - x: 71
+    y: 179
+    team: 2
+  - x: 71
+    y: 162
+    team: 3
+  - x: 4
+    y: 116
+    team: 2
+  - x: 166
+    y: 2
+    team: 3
+  - x: 53
+    y: 163
+    team: 2
+  - x: 199
+    y: 132
+    team: 3
+  - x: 140
+    y: 196
+    team: 2
+  - x: 14
+    y: 77
+    team: 3
+  - x: 103
+    y: 137
+    team: 2
+  - x: 170
+    y: 23
+    team: 3
+  - x: 131
+    y: 143
+    team: 2
+  - x: 10
+    y: 11
+    team: 3
+  - x: 132
+    y: 144
+    team: 2
+  - x: 41
+    y: 9
+    team: 3
+  - x: 149
+    y: 29
+    team: 2
+  - x: 48
+    y: 101
+    team: 3
+  - x: 124
+    y: 92
+    team: 2
+  - x: 121
+    y: 47
+    team: 3
+  - x: 163
+    y: 115
+    team: 2
+  - x: 92
+    y: 34
+    team: 3
+  - x: 21
+    y: 39
+    team: 2
+  - x: 189
+    y: 146
+    team: 3
+  - x: 100
+    y: 39
+    team: 2
+  - x: 29
+    y: 73
+    team: 3
+  - x: 0
+    y: 150
+    team: 2
+  - x: 76
+    y: 195
+    team: 3
+  - x: 121
+    y: 160
+    team: 2
+  - x: 176
+    y: 130
+    team: 3
+  - x: 1
+    y: 119
+    team: 2
+  - x: 162
+    y: 92
+    team: 3
+  - x: 11
+    y: 76
+    team: 2
+  - x: 165
+    y: 68
+    team: 3
+  - x: 89
+    y: 34
+    team: 2
+  - x: 28
+    y: 159
+    team: 3
+  - x: 147
+    y: 94
+    team: 2
+  - x: 156
+    y: 8
+    team: 3
+  - x: 106
+    y: 141
+    team: 2
+  - x: 171
+    y: 187
+    team: 3
+  - x: 118
+    y: 40
+    team: 2
+  - x: 139
+    y: 181
+    team: 3
+  - x: 0
+    y: 175
+    team: 2
+  - x: 175
+    y: 161
+    team: 3
+  - x: 126
+    y: 1
+    team: 2
+  - x: 169
+    y: 75
+    team: 3
+  - x: 197
+    y: 61
+    team: 2
+  - x: 177
+    y: 76
+    team: 3
+  - x: 67
+    y: 64
+    team: 2
+  - x: 181
+    y: 121
+    team: 3
+  - x: 184
+    y: 129
+    team: 2
+  - x: 193
+    y: 53
+    team: 3
+  - x: 31
+    y: 16
+    team: 2
+  - x: 187
+    y: 78
+    team: 3
+  - x: 41
+    y: 12
+    team: 2
+  - x: 62
+    y: 78
+    team: 3
+  - x: 9
+    y: 185
+    team: 2
+  - x: 158
+    y: 88
+    team: 3
+  - x: 159
+    y: 76
+    team: 2
+  - x: 159
+    y: 112
+    team: 3
+  - x: 152
+    y: 51
+    team: 2
+  - x: 187
+    y: 8
+    team: 3
+  - x: 35
+    y: 102
+    team: 2
+  - x: 139
+    y: 176
+    team: 3
+  - x: 83
+    y: 62
+    team: 2
+  - x: 80
+    y: 16
+    team: 3
+  - x: 71
+    y: 6
+    team: 2
+  - x: 197
+    y: 145
+    team: 3
+  - x: 68
+    y: 74
+    team: 2
+  - x: 161
+    y: 188
+    team: 3
+  - x: 27
+    y: 158
+    team: 2
+  - x: 91
+    y: 34
+    team: 3
+  - x: 149
+    y: 86
+    team: 2
+  - x: 110
+    y: 129
+    team: 3
+  - x: 188
+    y: 26
+    team: 2
+  - x: 157
+    y: 166
+    team: 3
+  - x: 197
+    y: 134
+    team: 2
+  - x: 101
+    y: 94
+    team: 3
+  - x: 87
+    y: 107
+    team: 2
+  - x: 112
+    y: 77
+    team: 3
+  - x: 177
+    y: 148
+    team: 2
+  - x: 66
+    y: 166
+    team: 3
+  - x: 171
+    y: 127
+    team: 2
+  - x: 188
+    y: 8
+    team: 3
+  - x: 59
+    y: 180
+    team: 2
+  - x: 43
+    y: 173
+    team: 3
+  - x: 191
+    y: 42
+    team: 2
+  - x: 8
+    y: 155
+    team: 3
+  - x: 4
+    y: 58
+    team: 2
+  - x: 26
+    y: 116
+    team: 3
+  - x: 178
+    y: 102
+    team: 2
+  - x: 114
+    y: 124
+    team: 3
+  - x: 130
+    y: 182
+    team: 2
+  - x: 67
+    y: 147
+    team: 3
+  - x: 185
+    y: 55
+    team: 2
+  - x: 48
+    y: 39
+    team: 3
+  - x: 182
+    y: 60
+    team: 2
+  - x: 45
+    y: 93
+    team: 3
+  - x: 190
+    y: 125
+    team: 2
+  - x: 4
+    y: 62
+    team: 3
+  - x: 102
+    y: 70
+    team: 2
+  - x: 129
+    y: 70
+    team: 3
+  - x: 84
+    y: 171
+    team: 2
+  - x: 8
+    y: 27
+    team: 3
+  - x: 32
+    y: 70
+    team: 2
+  - x: 77
+    y: 157
+    team: 3
+  - x: 165
+    y: 64
+    team: 2
+  - x: 179
+    y: 169
+    team: 3
+  - x: 16
+    y: 2
+    team: 2
+  - x: 14
+    y: 99
+    team: 3
+  - x: 52
+    y: 192
+    team: 2
+  - x: 147
+    y: 26
+    team: 3
+  - x: 10
+    y: 164
+    team: 2
+  - x: 167
+    y: 121
+    team: 3
+  - x: 92
+    y: 76
+    team: 2
+  - x: 49
+    y: 189
+    team: 3
+  - x: 90
+    y: 74
+    team: 2
+  - x: 113
+    y: 103
+    team: 3
+  - x: 4
+    y: 21
+    team: 2
+  - x: 61
+    y: 148
+    team: 3
+  - x: 65
+    y: 143
+    team: 2
+  - x: 26
+    y: 7
+    team: 3
+  - x: 141
+    y: 95
+    team: 2
+  - x: 108
+    y: 50
+    team: 3
+  - x: 21
+    y: 112
+    team: 2
+  - x: 60
+    y: 68
+    team: 3
+  - x: 58
+    y: 28
+    team: 2
+  - x: 169
+    y: 10
+    team: 3
+  - x: 164
+    y: 55
+    team: 2
+  - x: 118
+    y: 91
+    team: 3
+  - x: 132
+    y: 120
+    team: 2
+  - x: 198
+    y: 102
+    team: 3
+  - x: 171
+    y: 180
+    team: 2
+  - x: 129
+    y: 81
+    team: 3
+  - x: 3
+    y: 173
+    team: 2
+  - x: 128
+    y: 63
+    team: 3
+  - x: 110
+    y: 176
+    team: 2
+  - x: 150
+    y: 30
+    team: 3
+  - x: 196
+    y: 105
+    team: 2
+  - x: 194
+    y: 117
+    team: 3
+  - x: 144
+    y: 74
+    team: 2
+  - x: 169
+    y: 15
+    team: 3
+  - x: 125
+    y: 134
+    team: 2
+  - x: 96
+    y: 197
+    team: 3
+  - x: 53
+    y: 144
+    team: 2
+  - x: 195
+    y: 37
+    team: 3
+  - x: 62
+    y: 45
+    team: 2
+  - x: 167
+    y: 31
+    team: 3
+  - x: 146
+    y: 197
+    team: 2
+  - x: 73
+    y: 109
+    team: 3
+  - x: 155
+    y: 175
+    team: 2
+  - x: 193
+    y: 113
+    team: 3
+  - x: 198
+    y: 172
+    team: 2
+  - x: 108
+    y: 40
+    team: 3
+  - x: 89
+    y: 67
+    team: 2
+  - x: 128
+    y: 137
+    team: 3
+  - x: 56
+    y: 171
+    team: 2
+  - x: 141
+    y: 21
+    team: 3
+  - x: 124
+    y: 139
+    team: 2
+  - x: 66
+    y: 33
+    team: 3
+  - x: 66
+    y: 96
+    team: 2
 
 # == Schema Information
 #

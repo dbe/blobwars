@@ -1,0 +1,6 @@
+manager:
+  game_runner_klass: blobular
+  id: 1
+  game_clients: human_player human_player
+  height: 200
+  width: 200
