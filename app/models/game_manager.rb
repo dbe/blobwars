@@ -1,16 +1,13 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-one:
-  game_runner_klass: MyString
-  game_clients: MyString
-
-two:
-  game_runner_klass: MyString
-  game_clients: MyString
+class GameManager < ActiveRecord::Base
+  has_many :game_histories
+  def dimensions
+    {'x' => width, 'y' => height}
+  end
+end
 
 # == Schema Information
 #
-# Table name: game_runners
+# Table name: game_managers
 #
 #  id                :integer         not null, primary key
 #  game_runner_klass :string(255)

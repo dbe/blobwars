@@ -1,8 +1,9 @@
 class Move
-  def initialize(x, y)
+  def initialize(x, y, team)
     @x = x
     @y = y
+    @team = team
   end
   
-  attr_accessor :x, :y
+  attr_accessor :x, :y, :team
 end

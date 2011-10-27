@@ -5,7 +5,7 @@
   $(document).ready(function() {
     !function() {
       idealResolution = {x : 600, y: 600};
-      gameHistory = "#{@json}";
+      gameHistory = #{@json};
       
       if(gameHistory.dimensions.x > idealResolution.x || gameHistory.dimensions.y > idealResolution.y)
       {
@@ -14,7 +14,7 @@
       }
       
       var scalingFactor = {x : Math.floor((idealResolution.x / gameHistory.dimensions.x)), y :Math.floor((idealResolution.y / gameHistory.dimensions.y))};
-      $('body').prepend("<canvas id='history_viewer' width='" + gameHistory.dimensions.x * scalingFactor.x + "' height='" + gameHistory.dimensions.y * scalingFactor.y + "'> Please get a browser which supports canvas </canvas>");
+      $('body').prepend("<canvas id='history_viewer' width='" + gameHistory.dimensions.x * scalingFactor.x + "' height='" + gameHistory.dimensions.y * scalingFactor.y + "'> Please get a browser which supports canvas, foo </canvas>");
       $canvas = $('canvas');
       blobWars($canvas, gameHistory, scalingFactor);
     }();

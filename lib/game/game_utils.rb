@@ -1,5 +1,7 @@
+require './lib/game/game_state'
+
 module GameUtils
-  def valid?(game_state, move)
+  def self.valid?(game_state, move)
     return false if game_state.board[move.x][move.y] != GameConstants::BLANK
     return true if move.x + 1 < game_state.board.size && game_state.board[move.x + 1][move.y] == game_state.turn
     return true if move.x - 1 >= 0 && game_state.board[move.x - 1][move.y] == game_state.turn
@@ -7,20 +9,20 @@ module GameUtils
     move.y - 1 >= 0 && game_state.board[move.x][move.y - 1] == game_state.turn
   end
   
-  def handle_takes!(game_state)
+  def self.handle_takes!(game_state)
     handle_player_takes!(game_state)
     walls = find_takes(game_state, false)
     walls.map {|wall| game_state.board[wall.x][wall.y] = GameConstants::WALL}
   end
   
-  def handle_player_takes!(game_state)
+  def self.handle_player_takes!(game_state)
     begin
       takes = find_takes(game_state, true)
       takes.map {|take| game_state.board[take.x][take.y] = game_state.turn}
     end while takes.size > 0
   end
   
-  def find_takes(game_state, current_player)
+  def self.find_takes(game_state, current_player)
     # current_player: whether or not we're looking for
     # the takes of the player whose turn it is
     takes = []
@@ -36,11 +38,11 @@ module GameUtils
     takes
   end
   
-  def is_player?(piece)
+  def self.is_player?(piece)
     piece >= 0
   end
   
-  def surrounded?(game_state, x, y)
+  def self.surrounded?(game_state, x, y)
     counts = [0] * game_state.players.size
     
     -1.upto(1) do |i|

@@ -1,6 +1,6 @@
-class CreateGameRunners < ActiveRecord::Migration
+class CreateGameManagers < ActiveRecord::Migration
   def self.up
-    create_table :game_runners do |t|
+    create_table :game_managers do |t|
       t.string :game_runner_klass
       t.string :game_clients
       t.integer :width
@@ -11,6 +11,6 @@ class CreateGameRunners < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :game_runners
+    drop_table :game_managers
   end
 end
