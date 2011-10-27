@@ -13,7 +13,9 @@ class GameHistoriesController < ApplicationController
   # GET /game_histories/1
   # GET /game_histories/1.xml
   def show
-    @game_history = GameHistory.find(params[:id])
+    #@game_history = GameHistory.find(params[:id])
+    #json = @game_history.move_history
+    @json = GameHistory.find(params[:id]).jsonify
 
     respond_to do |format|
       format.html # show.html.erb

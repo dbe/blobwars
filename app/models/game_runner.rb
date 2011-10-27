@@ -1,4 +1,8 @@
 class GameRunner < ActiveRecord::Base
+  has_many :game_histories
+  def dimensions
+    {'x' => width, 'y' => height}
+  end
 end
 
 # == Schema Information

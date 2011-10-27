@@ -3,6 +3,8 @@ class CreateGameRunners < ActiveRecord::Migration
     create_table :game_runners do |t|
       t.string :game_runner_klass
       t.string :game_clients
+      t.integer :width
+      t.integer :height
 
       t.timestamps
     end
