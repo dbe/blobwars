@@ -1,3 +1,5 @@
+require './lib/game/game_state'
+
 module GameUtils
   def self.valid?(game_state, move)
     return false if game_state.board[move.x][move.y] != GameConstants::BLANK
