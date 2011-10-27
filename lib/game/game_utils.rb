@@ -41,6 +41,7 @@ module GameUtils
         end
       end
     end
+    
     takes
   end
   
