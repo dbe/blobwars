@@ -26,20 +26,20 @@ module GameUtils
     # current_player: whether or not we're looking for
     # the takes of the player whose turn it is
     takes = []
-    for i in board.size
-      for j in board.first.size
-        if is_player?(game_state.board[i][j]) 
-          next if current_player && game_state.board[i][j] == game_state.turn
+    board = game_state.board
+    board.each_index do |i|
+      board.first.each_index do |j|
+        if is_player?(board[i][j]) 
+          next if current_player && board[i][j] == game_state.turn
           takes << Move.new(i, j) if surrounded?(game_state, i, j)
         end
       end
     end
-    
     takes
   end
   
-  def self.is_player?(piece)
-    piece >= 0
+  def self.is_player?(tile)
+    tile >= 0
   end
   
   def self.surrounded?(game_state, x, y)
@@ -59,7 +59,7 @@ module GameUtils
     end
     
     max = 0
-    0.upto(counts.size - 1) do |i|
+    counts.each_index do |i|
       next if i == game_state.board[x][y]
       max = counts[i] if counts[i] > max
     end
