@@ -27,7 +27,7 @@ class GameRunner
         @@game_state.board[move.x][move.y] = @@game_state.turn   # players ids on board are position in client array
       
         # Handle any takes
-        GameUtils.handle_takes!(@@game_state)
+        GameUtils::handle_takes!(@@game_state)
       end while food
       
       # Rotate turn
