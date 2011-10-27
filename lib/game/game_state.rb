@@ -20,11 +20,12 @@ class GameState
   attr_accessor :board, :turn, :over, :players
   
   def rotate_turn!
-    @turn = (@turn + 1) % @players.size
+    @turn += 1
+    @over = true if @turn == TURN_LIMIT
   end
   
   def get_next_player
-    @players[turn]
+    @players[turn % @players.size]
   end
   
   def player_ate?
