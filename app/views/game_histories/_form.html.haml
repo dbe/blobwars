@@ -1,0 +1,19 @@
+= form_for @game_history do |f|
+  -if @game_history.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@game_history.errors.count, "error")} prohibited this game_history from being saved:"
+      %ul
+        - @game_history.errors.full_messages.each do |msg|
+          %li= msg
+
+  / .field
+  /     = f.label :move_history
+  /     = f.text_area :move_history
+  / .field
+  /     = f.label :winner
+  /     = f.text_field :winner
+  .field
+    = f.label :clients
+    = f.text_field :clients
+  .actions
+    = f.submit 'Play'

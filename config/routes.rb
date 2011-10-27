@@ -1,4 +1,10 @@
 BlobWars::Application.routes.draw do
+  resources :game_runners do
+    post 'play', :as => 'play', :on => :member
+  end
+
+  resources :game_histories
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

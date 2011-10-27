@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Move history:
+  = @game_history.move_history
+%p
+  %b Winner:
+  = @game_history.winner
+
+= link_to 'Edit', edit_game_history_path(@game_history)
+\|
+= link_to 'Back', game_histories_path
