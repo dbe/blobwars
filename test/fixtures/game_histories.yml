@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  move_history: MyText
+  winner: MyString
+
+two:
+  move_history: MyText
+  winner: MyString
+
+# == Schema Information
+#
+# Table name: game_histories
+#
+#  id           :integer         not null, primary key
+#  move_history :text
+#  winner       :string(255)
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+

@@ -1,0 +1,13 @@
+%p#notice= notice
+
+%p
+  %b Game runner klass:
+  = @game_runner.game_runner_klass
+%p
+  %b Game clients:
+  = @game_runner.game_clients
+= button_to "Play Game!", play_game_runner_path(@game_runner), :method => :post
+
+/= link_to 'Edit', edit_game_runner_path(@game_runner)
+/\|
+/= link_to 'Back', game_runners_path
