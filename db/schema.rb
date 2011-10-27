@@ -15,13 +15,16 @@ ActiveRecord::Schema.define(:version => 20111026221735) do
   create_table "game_histories", :force => true do |t|
     t.text     "move_history"
     t.string   "winner"
+    t.integer  "game_manager_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "game_runners", :force => true do |t|
+  create_table "game_managers", :force => true do |t|
     t.string   "game_runner_klass"
     t.string   "game_clients"
+    t.integer  "width"
+    t.integer  "height"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

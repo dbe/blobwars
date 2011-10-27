@@ -1,4 +1,4 @@
-class GameRunner < ActiveRecord::Base
+class GameManager < ActiveRecord::Base
   has_many :game_histories
   def dimensions
     {'x' => width, 'y' => height}
@@ -7,7 +7,7 @@ end
 
 # == Schema Information
 #
-# Table name: game_runners
+# Table name: game_managers
 #
 #  id                :integer         not null, primary key
 #  game_runner_klass :string(255)

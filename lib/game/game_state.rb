@@ -8,7 +8,7 @@ class GameState
     width.times do
       col = []
       height.times do
-        row << GameConstants::BLANK
+        col << GameConstants::BLANK
       end
       
       @board << col

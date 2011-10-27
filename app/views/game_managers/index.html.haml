@@ -1,0 +1,21 @@
+%h1 Listing game_managers
+
+%table
+  %tr
+    %th Game runner klass
+    %th Game clients
+    %th
+    %th
+    %th
+
+  - @game_managers.each do |game_manager|
+    %tr
+      %td= game_manager.game_runner_klass
+      %td= game_manager.game_clients
+      %td= link_to 'Show', game_manager
+      %td= link_to 'Edit', edit_game_manager_path(game_manager)
+      %td= link_to 'Destroy', game_manager, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Game runner', new_game_manager_path
