@@ -3,7 +3,7 @@ class CreateGameHistories < ActiveRecord::Migration
     create_table :game_histories do |t|
       t.text :move_history
       t.string :winner
-      t.references :game_runner
+      t.references :game_manager
 
       t.timestamps
     end

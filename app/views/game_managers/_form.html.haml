@@ -1,9 +1,9 @@
-= form_for @game_runner do |f|
-  -if @game_runner.errors.any?
+= form_for @game_manager do |f|
+  -if @game_manager.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@game_runner.errors.count, "error")} prohibited this game_runner from being saved:"
+      %h2= "#{pluralize(@game_manager.errors.count, "error")} prohibited this game_manager from being saved:"
       %ul
-        - @game_runner.errors.full_messages.each do |msg|
+        - @game_manager.errors.full_messages.each do |msg|
           %li= msg
 
   .field

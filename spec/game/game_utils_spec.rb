@@ -5,38 +5,38 @@ require './lib/game/move'
 
 describe GameUtils do
   before(:each) do
-    @game_state = GameState.new(2, 5, 5)
+    @game_state = GameState.new([0, 1], 5, 5)
     @game_state.board[0][0] = 0
     @game_state.board[4][4] = 1
     
-    @game_state2 = GameState.new(2, 5, 5)
+    @game_state2 = GameState.new([0, 1], 5, 5)
     @game_state2.board[2][2] = 0
     @game_state2.board[2][3] = 1
     @game_state2.board[2][1] = 1
     @game_state2.board[1][2] = 1
     @game_state2.board[3][2] = 1
     
-    @game_state3 = GameState.new(2, 5, 5)
+    @game_state3 = GameState.new([0, 1], 5, 5)
     @game_state3.board[0][0] = 0
     @game_state3.board[0][1] = 1
     @game_state3.board[1][0] = 1
     @game_state3.board[1][1] = 1
     
-    @game_state4 = GameState.new(2, 5, 5)
+    @game_state4 = GameState.new([0, 1], 5, 5)
     @game_state4.board[2][2] = 0
     @game_state4.board[1][1] = 1
     @game_state4.board[1][2] = 1
     @game_state4.board[1][3] = 1
     @game_state4.board[2][1] = 1
     
-    @game_state5 = GameState.new(2, 5, 5)
+    @game_state5 = GameState.new([0, 1], 5, 5)
     @game_state5.board[2][2] = 0
     @game_state5.board[3][1] = 1
     @game_state5.board[3][2] = 1
     @game_state5.board[3][3] = 1
     @game_state5.board[2][3] = 1
     
-    @game_state6 = GameState.new(2, 5, 5)
+    @game_state6 = GameState.new([0, 1], 5, 5)
     @game_state6.board[1][1] = 0
     @game_state6.board[1][2] = 0
     @game_state6.board[1][3] = 0
@@ -48,7 +48,7 @@ describe GameUtils do
     @game_state6.board[4][2] = 0
     @game_state6.board[4][3] = 0
     
-    @game_state7 = GameState.new(2, 5, 5)
+    @game_state7 = GameState.new([0, 1], 5, 5)
     @game_state7.board[1][1] = 0
     @game_state7.board[1][2] = 0
     @game_state7.board[1][3] = 0
@@ -62,25 +62,25 @@ describe GameUtils do
   
   context "valid? is called with an invalid move" do
     it "should return false" do
-      GameUtils::valid?(@game_state, Move.new(0,0)).should == false
+      GameUtils::valid?(@game_state, Coordinate.new(0,0)).should == false
     end
     it "should return false" do
-      GameUtils::valid?(@game_state, Move.new(2,2)).should == false
+      GameUtils::valid?(@game_state, Coordinate.new(2,2)).should == false
     end
     it "should return false" do
-      GameUtils::valid?(@game_state, Move.new(4,3)).should == false
+      GameUtils::valid?(@game_state, Coordinate.new(4,3)).should == false
     end
     it "should return false" do
-      GameUtils::valid?(@game_state, Move.new(1,1)).should == false
+      GameUtils::valid?(@game_state, Coordinate.new(1,1)).should == false
     end
   end
   
   context "valid? is called with a valid move" do
     it "should return true" do
-      GameUtils::valid?(@game_state, Move.new(0,1)).should == true
+      GameUtils::valid?(@game_state, Coordinate.new(0,1)).should == true
     end
     it "should return true" do
-      GameUtils::valid?(@game_state, Move.new(1,0)).should == true
+      GameUtils::valid?(@game_state, Coordinate.new(1,0)).should == true
     end
   end
   
@@ -112,13 +112,13 @@ describe GameUtils do
   
   context "find_takes is called for the non-current players" do
     it "should find all places where a player is surrounded by 4+ of any other one player" do
-      GameUtils::find_takes(@game_state2, false).should =~ [Move.new(2,2)]
+      GameUtils::find_takes(@game_state2, false).should =~ [Coordinate.new(2,2)]
     end
   end
   
   context "find_takes is called for the non-current players" do
     it "should find all places where a player is surrounded by 4+ of any other one player" do
-      GameUtils::find_takes(@game_state6, false).should =~ [Move.new(2,2), Move.new(3,2)]
+      GameUtils::find_takes(@game_state6, false).should =~ [Coordinate.new(2,2), Coordinate.new(3,2)]
     end
   end
   
