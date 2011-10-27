@@ -12,13 +12,13 @@ module GameUtils
   def self.handle_takes!(game_state)
     handle_player_takes!(game_state)
     walls = find_takes(game_state, false)
-    walls.map {|wall| game_state.board[wall.x][wall.y] = GameConstants::WALL}
+    walls.map {|wall| game_state.apply_move(wall.x, wall.y, GameConstants::WALL)}
   end
   
   def self.handle_player_takes!(game_state)
     begin
       takes = find_takes(game_state, true)
-      takes.map {|take| game_state.board[take.x][take.y] = game_state.turn}
+      takes.map {|take| game_state.apply_move(take.x, take.y, game_state.turn)}
     end while takes.size > 0
   end
   
@@ -26,24 +26,25 @@ module GameUtils
     # current_player: whether or not we're looking for
     # the takes of the player whose turn it is
     takes = []
-    for i in board.size
-      for j in board.first.size
-        if is_player?(game_state.board[i][j]) 
-          next if current_player && game_state.board[i][j] == game_state.turn
-          takes << Move.new(i, j) if surrounded?(game_state, i, j)
+    board = game_state.board
+    board.each_index do |i|
+      board.first.each_index do |j|
+        if is_player?(board[i][j]) 
+          next if current_player && board[i][j] == game_state.turn
+          takes << Coordinate.new(i, j) if surrounded?(game_state, i, j)
         end
       end
     end
-    
     takes
   end
   
-  def self.is_player?(piece)
-    piece >= 0
+  def self.is_player?(tile)
+    tile >= 0
   end
   
   def self.surrounded?(game_state, x, y)
     counts = [0] * game_state.players.size
+    player = game_state.board[x][y]
     
     -1.upto(1) do |i|
       -1.upto(1) do |j|
@@ -51,19 +52,13 @@ module GameUtils
         c_y = y + j
         next if c_x < 0 || c_x >= game_state.board.size
         next if c_y < 0 || c_y >= game_state.board.first.size
-        player = game_state.board[c_x][c_y]
-        if is_player?(player)
-          counts[player] += 1
+        surrounding_player = game_state.board[c_x][c_y]
+        if is_player?(surrounding_player) && player != surrounding_player
+          counts[surrounding_player] += 1
         end
       end  
     end
-    
-    max = 0
-    0.upto(counts.size - 1) do |i|
-      next if i == game_state.board[x][y]
-      max = counts[i] if counts[i] > max
-    end
-    
-    max >= 4
+
+    counts.each.max >= 4
   end
 end

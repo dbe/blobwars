@@ -9,7 +9,6 @@ class GameRunner
   
   def play(players, height, width)
     @game_state = GameState.new(players, height, width)
-    @game_history = []
     
     # Put players on board
     # TODO
@@ -18,11 +17,22 @@ class GameRunner
       # Get the player whose turn it is
       player = @game_state.get_next_player
       
+<<<<<<< HEAD
       # Get client move
       move = player.get_move(@game_state)
       
       # Add the move to the game history
       @game_history << Move.new(move.x, move.y, player.team)
+=======
+      begin
+        # Player has not yet eaten
+        food = false
+        
+        # Get client move
+        move = player.get_move(@game_state)
+        
+        @game_state.apply_move(move.x, move.y, player.team)
+>>>>>>> 7bb44d7b65f3bafa5f6c1387ca759433251bbdd8
       
       # Validate move
       next if !GameUtils.valid?(@game_state, move)
@@ -38,7 +48,7 @@ class GameRunner
     end
     
     puts "game state is #{@game_state}"
-    {:deltas => @game_history, :winner => 'danny'}
+    {:deltas => @game_state.game_history, :winner => 'danny'}
   end
   
 end
