@@ -5,16 +5,7 @@
   $(document).ready(function() {
     !function() {
       idealResolution = {x : 600, y: 600};
-      gameHistory = {
-        dimensions : {x : 20, y: 20},
-        deltas : [
-          {x : 1, y: 1, team : 0},
-          {x : 2, y: 1, team : 2},
-          {x : 10, y: 1, team : 3},
-          {x : 4, y: 1, team : 4},
-          {x : 5, y: 1, team : 5}
-        ]
-      };
+      gameHistory = "#{@json}";
       
       if(gameHistory.dimensions.x > idealResolution.x || gameHistory.dimensions.y > idealResolution.y)
       {
