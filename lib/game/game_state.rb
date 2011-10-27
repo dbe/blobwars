@@ -5,13 +5,13 @@ class GameState
     @over = false
     
     @board = []
-    height.times do
-      row = []
-      width.times do
+    width.times do
+      col = []
+      height.times do
         row << GameConstants::BLANK
       end
       
-      @board << row
+      @board << col
     end
   end
   
