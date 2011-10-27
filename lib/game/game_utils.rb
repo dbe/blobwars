@@ -65,7 +65,7 @@ module GameUtils
   
   private
   
-  def player_is_up_down_right_or_left?(game_state, move)
+  def self.player_is_up_down_right_or_left?(game_state, move)
     game_state.board[(move.x + 1) % game_state.board.size][move.y] == game_state.turn ||
     game_state.board[(move.x - 1) % game_state.board.size][move.y] == game_state.turn ||
     (game_state.board[move.x][(move.y + 1) % game_state.board.first.size] == game_state.turn) ||

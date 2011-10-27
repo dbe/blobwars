@@ -64,12 +64,15 @@ describe GameUtils do
     it "should return false" do
       GameUtils::valid?(@game_state, Coordinate.new(0,0)).should == false
     end
+    
     it "should return false" do
       GameUtils::valid?(@game_state, Coordinate.new(2,2)).should == false
     end
+    
     it "should return false" do
       GameUtils::valid?(@game_state, Coordinate.new(4,3)).should == false
     end
+    
     it "should return false" do
       GameUtils::valid?(@game_state, Coordinate.new(1,1)).should == false
     end
@@ -79,6 +82,7 @@ describe GameUtils do
     it "should return true" do
       GameUtils::valid?(@game_state, Coordinate.new(0,1)).should == true
     end
+    
     it "should return true" do
       GameUtils::valid?(@game_state, Coordinate.new(1,0)).should == true
     end
