@@ -97,17 +97,6 @@ describe GameUtils do
     end
   end
   
-  context "handle_player_takes! is called" do
-    it "should handle the takes for the current player appropriately" do
-      ref_board = Marshal.load(Marshal.dump(@game_state6.board))
-      ref_board[2][1] = 0
-      ref_board[2][2] = 0
-      ref_board[3][2] = 0
-      GameUtils::handle_player_takes!(@game_state6)
-      @game_state6.board.should =~ ref_board
-    end
-  end
-  
   context "find_takes is called for the non-current players" do
     it "should find all places where a player is surrounded by 4+ of any other one player" do
       GameUtils::find_takes(@game_state, true).should be_empty
@@ -164,8 +153,7 @@ describe GameUtils do
   
   context "handle_takes! is called" do
     it "should update history properly" do
-      GameUtils::handle_takes!(@game_state7)
-      @game_state7.board.should =~ ref_board
+      # TODO
     end
   end
   

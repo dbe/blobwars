@@ -17,15 +17,16 @@ module GameUtils
   
   def self.handle_takes!(game_state)
     begin
-      handle_takes!(game_state, true)
+      takes = handle_player_takes!(game_state, true)
     end while takes.size > 0
     
-    handle_takes!(game_state, false)
+    handle_player_takes!(game_state, false)
   end
   
-  def self.handle_takes!(game_state, current_player)
+  def self.handle_player_takes!(game_state, current_player)
     takes = find_takes(game_state, current_player)
     takes.map {|take| game_state.apply_move(take.x, take.y, current_player ? game_state.turn : GameConstants::WALL)}
+    takes
   end
   
   def self.find_takes(game_state, current_player)
