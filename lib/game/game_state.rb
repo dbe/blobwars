@@ -1,3 +1,5 @@
+require './lib/game/game_constants'
+
 class GameState
   def initialize(players, height, width)
     @players = players        # the client array
@@ -8,14 +10,14 @@ class GameState
     width.times do
       col = []
       height.times do
-        row << GameConstants::BLANK
+        col << GameConstants::BLANK
       end
       
       @board << col
     end
   end
   
-  attr_accessor :board, :turn, :over
+  attr_accessor :board, :turn, :over, :players
   
   def rotate_turn!
     @turn = (@turn + 1) % @players.size
