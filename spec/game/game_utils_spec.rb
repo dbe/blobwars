@@ -158,4 +158,11 @@ describe GameUtils do
     end
   end
   
+  context "handle_takes! is called" do
+    it "should update history properly" do
+      GameUtils::handle_takes!(@game_state7)
+      @game_state7.board.should =~ ref_board
+    end
+  end
+  
 end

@@ -26,17 +26,15 @@ class GameRunner
         
         # Get client move
         move = player.get_move(@game_state)
-        
-        @game_state.apply_move(move.x, move.y, player.team)
-      
+                
         # Validate move
         #TODO - will this break out of the while loop, or the begin/end loop
         break if !GameUtils.valid?(@game_state, move)
       
         # Execute move
         food = true if @game_state.board[move.x][move.y] == GameConstants::FOOD
-        @game_state.board[move.x][move.y] = @game_state.turn   # players ids on board are position in client array
-      
+        @game_state.apply_move(move.x, move.y, player.team)
+        
         # Handle any takes
         GameUtils::handle_takes!(@game_state)
       end while food

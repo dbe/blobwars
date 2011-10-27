@@ -2,11 +2,14 @@ require './lib/game/game_state'
 
 module GameUtils
   def self.valid?(game_state, move)
-    return false if game_state.board[move.x][move.y] != GameConstants::BLANK
+    return false if move.x < 0 || move.x >= game_state.board.size || move.y < 0 || move.y >= game_state.board.first.size
+    return false if game_state.board[move.x][move.y] != GameConstants::BLANK rescue true
     return true if move.x + 1 < game_state.board.size && game_state.board[move.x + 1][move.y] == game_state.turn
     return true if move.x - 1 >= 0 && game_state.board[move.x - 1][move.y] == game_state.turn
     return true if move.y + 1 < game_state.board.first.size && game_state.board[move.x][move.y + 1] == game_state.turn
     move.y - 1 >= 0 && game_state.board[move.x][move.y - 1] == game_state.turn
+    
+    
   end
   
   def self.handle_takes!(game_state)
