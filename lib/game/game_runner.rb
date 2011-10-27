@@ -9,7 +9,6 @@ class GameRunner
   
   def play(players, height, width)
     @game_state = GameState.new(players, height, width)
-    @game_history = []
     
     # Put players on board
     # TODO
@@ -28,7 +27,7 @@ class GameRunner
         # Get client move
         move = player.get_move(@game_state)
         
-        @game_history << Move.new(move.x, move.y, player.team)
+        @game_state.apply_move(move.x, move.y, player.team)
       
         # Validate move
         #TODO - will this break out of the while loop, or the begin/end loop
@@ -46,7 +45,7 @@ class GameRunner
       @game_state.rotate_turn!
     end
     puts "game state is #{@game_state}"
-    {:deltas => @game_history, :winner => 'danny'}
+    {:deltas => @game_state.game_history, :winner => 'danny'}
   end
   
 end
