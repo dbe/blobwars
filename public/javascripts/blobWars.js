@@ -56,14 +56,14 @@ BlobWars = (function() {
       var timeNow = new Date().getTime();
       for(var i = 0; i < deltas.length; i++)
       {
-        //Make sure to pass onComplete function to last animation call
-        if(i == deltas.length - 1)
+        //only call onComplete to the final function call
+        if(i < deltas.length - 1)
         {
-          renderQueue.add(timeNow + (delay * i), paintDelta, this, deltas[i], onComplete)
+          renderQueue.add(timeNow + (delay * i), paintDelta, this, deltas[i])          
         }
         else
         {
-          renderQueue.add(timeNow + (delay * i), paintDelta, this, deltas[i])
+          renderQueue.add(timeNow + (delay * i), paintDelta, this, deltas[i], onComplete)
         }
       }
     }
@@ -71,7 +71,7 @@ BlobWars = (function() {
     var paintDelta = function(delta, onComplete) {
       context.fillStyle = colors[delta.objectID];
       context.fillRect(delta.x * scalingFactor.x, delta.y * scalingFactor.y, scalingFactor.x, scalingFactor.y);
-      if(onComplete){onComplete();}
+      onComplete && onComplete();
     }
     
     var clearBoard = function() {
