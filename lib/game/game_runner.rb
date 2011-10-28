@@ -23,16 +23,18 @@ class GameRunner
       
       # Get client move
       move = player.get_move(@game_state)
-      
+
       # Validate move
-      next if !GameUtils.valid?(@game_state, move)
+      if !GameUtils.valid?(@game_state, move)
+        @game_state.rotate_turn!
+      end
       
       # Apply move
       @game_state.apply_move(move.x, move.y, player.team)
-      
+  
       # Handle any takes
       GameUtils::handle_takes!(@game_state)
-      
+  
       # Rotate turn
       @game_state.rotate_turn!
     end

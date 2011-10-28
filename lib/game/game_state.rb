@@ -2,6 +2,7 @@ require './lib/game/game_constants'
 
 class GameState
   TURN_LIMIT = 500
+
   def initialize(players, height, width)
     @players = players        # the client array
     @turn = 0                 # index into clients array
@@ -23,6 +24,7 @@ class GameState
   attr_accessor :board, :over, :players, :game_history, :current_player
   
   def rotate_turn!
+    puts "We're at turn #{@turn}"
     @turn += 1
     @current_player = @players[@turn % @players.size].team
     @over = true if @turn > TURN_LIMIT
