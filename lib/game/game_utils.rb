@@ -5,30 +5,16 @@ module GameUtils
   
   def self.find_winners(game_state)
     scores = Hash.new
+    scores.default = 0
+    # Count the number of tiles for each player
     game_state.board.each do |col|
       col.each do |player_id|
-        next if player_id == GameConstants::BLANK
-        next if player_id == GameConstants::WALL
-        
-        if scores[player_id]
-          scores[player_id] += 1
-        else
-          scores[player_id] = 1
-        end
+        scores[player_id] += 1 if player_id != GameConstants::BLANK && player_id != GameConstants::WALL
       end
     end
     
-    max = 0
-    scores.values.each do |count|
-      max = count if count > max
-    end
-    
-    winners = []
-    scores.each_pair do |player_id, count|
-      winners << player_id if count == max
-    end
-    
-    winners
+    max = scores.values.each.max
+    scores.reject {|k,v| v != max}.keys
   end
   
   def self.valid?(game_state, move)
