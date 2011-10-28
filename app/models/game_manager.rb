@@ -1,4 +1,8 @@
 class GameManager < ActiveRecord::Base
+  validate :width, :presence => true
+  validate :height, :presence => true
+  
+  
   CLIENT_FOLDER = "ai"
   RUNNER_FOLDER = "runner"
   
@@ -27,7 +31,13 @@ class GameManager < ActiveRecord::Base
     p game_history
     # self.game_histories.create(:move_history => history[:deltas].map do |delta|
     #      {'x' => delta.x, 'y' => delta.y, 'team' => delta.team}
-   #  end, :winner => history[:winner])
+    #  end, :winner => history[:winner])
+    self.game_histories.create(:move_history => game_history[:turns].map do |turn|
+      {'team' => turn.team, 'deltas' => turn.deltas.map do |delta|
+        {'x' => delta.x, 'y' => delta.y, 'object_id' => delta.object_id}
+      end}
+    end,
+    :winners => game_history[:winners])
   end
 end
 

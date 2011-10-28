@@ -1,12 +1,13 @@
 class GameHistory < ActiveRecord::Base
   serialize :move_history
+  serialize :winners
   belongs_to :game_manager
   validate :game_manager, :presence => true
   
   def jsonify
     {
       'dimensions' => game_manager.dimensions,
-      'deltas' => move_history
+      'turns' => move_history
     }.to_json
   end
 end
