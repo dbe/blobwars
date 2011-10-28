@@ -25,6 +25,8 @@ class GameState
   
   def rotate_turn!
     @turn += 1
+    puts "Turn limit reached" if @turn > TURN_LIMIT
+    puts "All players passed" if @passed_count == players.size
     @over = true if @turn > TURN_LIMIT || @passed_count == players.size
     passed_count = 0
   end
@@ -39,4 +41,5 @@ class GameState
     turn.deltas << Delta.new(move.x, move.y, object_id)
     turn
   end
+  
 end

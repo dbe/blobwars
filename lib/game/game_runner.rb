@@ -19,8 +19,7 @@ class GameRunner
  
     while !@game_state.over do
       @game_state.players.each_index do |object_id|
-        puts object_id
-        
+
         # Set current player -- used elsewhere
         @game_state.current_player = players[object_id].team
         
