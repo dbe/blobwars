@@ -83,23 +83,6 @@ class GameManagersController < ApplicationController
   
   def play
     manager = GameManager.find(params[:id])
-    #make sure to load the classes file, then instantiate an instance of it
-    load "runner/#{manager.game_runner_klass}.rb"
-    game_runner_instance = Object.const_get(manager.game_runner_klass.classify).new
-    puts "game runner instance is #{game_runner_instance.class}"
-    i = 1
-    clients = manager.game_clients.split.map do |c|
-      # Lets reload each AI class for each run.
-      load "ai/#{c}.rb"
-      #create the AI instance with a new id
-      Object.const_get(c.classify).new(i += 1)
-    end
-    
-    
-    history = game_runner_instance.play(clients, manager.width, manager.height)
-    history_record = manager.game_histories.create(:move_history => history[:deltas].map do |delta|
-      {'x' => delta.x, 'y' => delta.y, 'team' => delta.team}
-    end, :winner => history[:winner])
-    redirect_to history_record
+    redirect_to manager.play
   end
 end
