@@ -21,57 +21,46 @@ BlobWars = (function() {
     $('#' + divID).append("<canvas id='history_viewer' width='" + (dimensions.x * scalingFactor.x) + "' height='" + (dimensions.y * scalingFactor.y) + "'> Please get a browser which supports canvas, foo </canvas>");
     return $('#history_viewer')[0];
   }
-   
+  
+  function RenderQueue() {
+    //list of {:time => time in millis in which to run this thing, :callback => function to run}
+    this.queue = [];
+    this.add = function(timeToExecute, callback, thisVar) {
+      this.queue.push({time : timeToExecute, callback : callback, thisVar : thisVar, args : Array.prototype.slice.call(arguments, 3)});
+    }
+    this.runValidFunctions = function() {
+      var timeNow = new Date().getTime();
+      for(var i = 0; i < this.queue.length; i++)
+      {
+        //Time to run this function
+        if(this.queue[i].time < timeNow){
+          var object = this.queue.splice(i, 1)[0];
+          object.callback.apply(object.thisVar, object.args);
+        }
+      }
+    }
+    //Warning, this might cause some memory leak
+    this.clearQueue = function() {
+      this.queue = [];
+    }
+  }
+  
   function Viewer(canvas, gameHistory, scalingFactor) {
     var context = canvas.getContext('2d');
     var canvasDimensions = {x : (gameHistory.dimensions.x * scalingFactor.x), y : (gameHistory.dimensions.y * scalingFactor.y) };
-    var currentTurn = 1;
-    var playing = false;
+    var renderQueue = new RenderQueue();
+    var renderQueueIntervalID = setInterval(function(){renderQueue.runValidFunctions.call(renderQueue)}, 0);
     
-    function animateDeltas(deltas, i, delay, callback) {
-      paintDelta(deltas[i++]);
-      if(i < deltas.length)
-      {
-        setTimeout(animateDeltas, delay, deltas, i, delay, callback);
-      }
-      else
-      {
-        currentTurn++;
-        setTimeout(callback, delay);
-      }
-    }
-    
-    function paintDelta(delta) {
+    var paintDelta = function(delta) {
       context.fillStyle = colors[delta.objectID];
       context.fillRect(delta.x * scalingFactor.x, delta.y * scalingFactor.y, scalingFactor.x, scalingFactor.y);
     }
     
-    function play() {
-      if(playing) 
-      {
-        animateDeltas(gameHistory.turns[currentTurn - 1].deltas, 0, 50, play);
-      }
+    this.testThing = function() {
+      var timeNow = new Date().getTime();
+      renderQueue.add(timeNow + 500, paintDelta, this, gameHistory.turns[0].deltas[0]);
     }
-    
-    // this.paintTurn = function(turnNumber, delayPerDelta) {
-    //   this.clearBoard();
-    //   var turn = gameHistory.turns[turnNumber - 1];
-    //   animateDeltas(turn.deltas, 0, delayPerDelta);
-    // }
-    
-    this.playFromBeginning = function() {
-      this.clearBoard();
-      currentTurn = 1;
-      playing = true;
-      play();
-    }
-    
-    //Make this private possibly
-    this.clearBoard = function() {
-      context.clearRect(0, 0, canvasDimensions.x, canvasDimensions.y);
-    }    
   }
-   
   
   return {
     //Returns new Viewer object for the view to use
@@ -79,7 +68,69 @@ BlobWars = (function() {
       if(!validGameHistory){return false};
       var scalingFactor = getScalingFactor(gameHistory.dimensions);
       canvas = constructCanvasElement(gameHistory.dimensions, scalingFactor, divID);
-      return new Viewer(canvas, gameHistory, scalingFactor); 
+      return new Viewer(canvas, gameHistory, scalingFactor);
     }
-  }
+  }  
 })();
+
+  // function Viewer(canvas, gameHistory, scalingFactor) {
+    // var context = canvas.getContext('2d');
+    // var canvasDimensions = {x : (gameHistory.dimensions.x * scalingFactor.x), y : (gameHistory.dimensions.y * scalingFactor.y) };
+  //   var currentTurn = 1;
+  //   var playing = false;
+  //   
+  //   function animateDeltas(deltas, i, delay, callback) {
+  //     paintDelta(deltas[i++]);
+  //     if(i < deltas.length)
+  //     {
+  //       setTimeout(animateDeltas, delay, deltas, i, delay, callback);
+  //     }
+  //     else
+  //     {
+  //       currentTurn++;
+  //       setTimeout(callback, delay);
+  //     }
+  //   }
+  //   
+    // function paintDelta(delta) {
+    //   context.fillStyle = colors[delta.objectID];
+    //   context.fillRect(delta.x * scalingFactor.x, delta.y * scalingFactor.y, scalingFactor.x, scalingFactor.y);
+    // }
+  //   
+  //   function play() {
+  //     if(playing) 
+  //     {
+  //       animateDeltas(gameHistory.turns[currentTurn - 1].deltas, 0, 50, play);
+  //     }
+  //   }
+  //   
+  //   // this.paintTurn = function(turnNumber, delayPerDelta) {
+  //   //   this.clearBoard();
+  //   //   var turn = gameHistory.turns[turnNumber - 1];
+  //   //   animateDeltas(turn.deltas, 0, delayPerDelta);
+  //   // }
+  //   
+  //   this.playFromBeginning = function() {
+  //     this.clearBoard();
+  //     currentTurn = 1;
+  //     playing = true;
+  //     play();
+  //   }
+  //   
+  //   //Make this private possibly
+  //   this.clearBoard = function() {
+  //     context.clearRect(0, 0, canvasDimensions.x, canvasDimensions.y);
+  //   }    
+  // }
+  //  
+  // 
+  // return {
+  //       //Returns new Viewer object for the view to use
+  //       initialize : function(gameHistory, divID) {
+  //         if(!validGameHistory){return false};
+  //         var scalingFactor = getScalingFactor(gameHistory.dimensions);
+  //         canvas = constructCanvasElement(gameHistory.dimensions, scalingFactor, divID);
+  //         return new Viewer(canvas, gameHistory, scalingFactor); 
+  //       }
+  // }
+// })();
