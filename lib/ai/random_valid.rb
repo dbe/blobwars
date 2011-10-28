@@ -19,7 +19,7 @@ class RandomValid < Player
 
     # Init to be an invalid move
     new_move = Move.new(-1, -1, @team)
-    while !directions.empty?
+    while !directions.empty? && @last_move != nil
       direction = directions[rand(directions.size)]
       temp_move = add_direction(@last_move, direction)
       if GameUtils::valid?(game_state, temp_move)
@@ -42,13 +42,13 @@ class RandomValid < Player
   private
   
   def starting_cell(game_state)
-    if true #@last_move == nil
+    if @last_move == nil
       possible_starts = []
-      width = game_state.board.size
-      height = game_state.board.first.size
-      game_state.board.each_index do |i|
-        game_state.board[i].each_index do |j|
-          if game_state.board[i][j] == @team
+      width = game_state.board.width
+      height = game_state.board.height
+      (0..width).each do |i|
+        (0..height).each do |j|
+          if game_state.board.same_player?(i, j, @team)
             current_position = Move.new(i, j, @team)
             ALL_DIRECTIONS.each do |direction|
               move = add_direction(current_position, direction)

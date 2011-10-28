@@ -5,19 +5,18 @@ require './lib/game/move'
 class GameInitializer
   def prepare(game_state)
     player_count = game_state.players.size
-    width = game_state.board.size
-    height = game_state.board.first.size
+    width = game_state.board.width
+    height = game_state.board.height
+    
     return false if player_count > width * height
-    game_state.players.each_index do |object_id|
-        team = game_state.players[object_id].team
+    
+    game_state.players.each do |player|
       invalid_position = true
       begin
         x = rand(width)
         y = rand(height)
-        coord = Coordinate.new(x, y)
-        if game_state.board[x][y] == GameConstants::BLANK
-          setup_move = Move.new(x, y, team)
-          game_state.apply_move_and_return_turn(setup_move, object_id)
+        if game_state.board.available?(x,y)
+          game_state.board.player!(x,y,player.team)
           break
         end
       end while true
