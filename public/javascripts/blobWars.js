@@ -18,30 +18,58 @@ BlobWars = (function() {
    
   //constructs and returns a canvas object
   function constructCanvasElement(dimensions, scalingFactor, divID) {
-    $('#' + divID).append("<canvas id='history_viewer' width='" + dimensions.x * scalingFactor.x + "' height='" + dimensions.y * scalingFactor.y + "'> Please get a browser which supports canvas, foo </canvas>");
+    $('#' + divID).append("<canvas id='history_viewer' width='" + (dimensions.x * scalingFactor.x) + "' height='" + (dimensions.y * scalingFactor.y) + "'> Please get a browser which supports canvas, foo </canvas>");
     return $('#history_viewer')[0];
   }
    
   function Viewer(canvas, gameHistory, scalingFactor) {
     var context = canvas.getContext('2d');
+    var canvasDimensions = {x : (gameHistory.dimensions.x * scalingFactor.x), y : (gameHistory.dimensions.y * scalingFactor.y) };
+    var currentTurn = 1;
+    var playing = false;
     
-    function printDeltas(deltas) {
-      for(var i = 0; i < deltas.length; i++)
+    function animateDeltas(deltas, i, delay, callback) {
+      paintDelta(deltas[i++]);
+      if(i < deltas.length)
       {
-        printDelta(deltas[i]);
+        setTimeout(animateDeltas, delay, deltas, i, delay, callback);
+      }
+      else
+      {
+        currentTurn++;
+        setTimeout(callback, delay);
       }
     }
     
-    function printDelta(delta) {
+    function paintDelta(delta) {
       context.fillStyle = colors[delta.objectID];
       context.fillRect(delta.x * scalingFactor.x, delta.y * scalingFactor.y, scalingFactor.x, scalingFactor.y);
     }
     
-    this.paintTurn = function(turnNumber) {
-      var turn = gameHistory.turns[turnNumber - 1];
-      console.log("Printing turn for player : " + turn.playerID);
-      printDeltas(turn.deltas);
+    function play() {
+      if(playing) 
+      {
+        animateDeltas(gameHistory.turns[currentTurn - 1].deltas, 0, 50, play);
+      }
     }
+    
+    // this.paintTurn = function(turnNumber, delayPerDelta) {
+    //   this.clearBoard();
+    //   var turn = gameHistory.turns[turnNumber - 1];
+    //   animateDeltas(turn.deltas, 0, delayPerDelta);
+    // }
+    
+    this.playFromBeginning = function() {
+      this.clearBoard();
+      currentTurn = 1;
+      playing = true;
+      play();
+    }
+    
+    //Make this private possibly
+    this.clearBoard = function() {
+      context.clearRect(0, 0, canvasDimensions.x, canvasDimensions.y);
+    }    
   }
    
   
@@ -50,7 +78,7 @@ BlobWars = (function() {
     initialize : function(gameHistory, divID) {
       if(!validGameHistory){return false};
       var scalingFactor = getScalingFactor(gameHistory.dimensions);
-      canvas = constructCanvasElement(gameHistory, scalingFactor, divID);
+      canvas = constructCanvasElement(gameHistory.dimensions, scalingFactor, divID);
       return new Viewer(canvas, gameHistory, scalingFactor); 
     }
   }
