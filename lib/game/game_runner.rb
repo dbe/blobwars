@@ -34,8 +34,7 @@ class GameRunner
 
           # Handle any takes
           GameUtils::handle_takes!(@game_state, turn)
-        else
-          puts "#{player.team} passed"
+        elseß
           @game_state.player_passed
         end
       
@@ -51,7 +50,7 @@ class GameRunner
     end
     
     winners = GameUtils::find_winners(@game_state)
-    puts "#{@game_state.game_history.inspect}"
+    #puts "#{@game_state.game_history.inspect}"
     # puts "game state is #{@game_state.board[1]}"
     {:turns => @game_state.game_history, :dimensions => {:x => width, :y => height}, :winners => winners}
   end
