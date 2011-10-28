@@ -16,7 +16,11 @@ class GameInitializer
         x = rand(width)
         y = rand(height)
         if game_state.board.available?(x,y)
+          turn = Turn.new(player.team)
+          game_state.board.deltas = []
           game_state.board.player!(x,y,player.team)
+          turn.deltas = game_state.board.deltas
+          game_state.game_history << turn
           break
         end
       end while true

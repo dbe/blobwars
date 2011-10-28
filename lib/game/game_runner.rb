@@ -51,7 +51,7 @@ class GameRunner
     
     winners = GameUtils::find_winners(@game_state)
     #puts "#{@game_state.game_history.inspect}"
-    # puts "game state is #{@game_state.board[1]}"
+    #puts "game state is #{@game_state.board.inspect}"
     {:turns => @game_state.game_history, :dimensions => {:x => width, :y => height}, :winners => winners}
   end
   
