@@ -64,12 +64,15 @@ describe GameUtils do
     it "should return false" do
       GameUtils::valid?(@game_state, Move.new(0,0,0)).should == false
     end
+    
     it "should return false" do
       GameUtils::valid?(@game_state, Move.new(2,2,0)).should == false
     end
+    
     it "should return false" do
       GameUtils::valid?(@game_state, Move.new(4,3,0)).should == false
     end
+    
     it "should return false" do
       GameUtils::valid?(@game_state, Move.new(1,1,0)).should == false
     end
@@ -79,6 +82,7 @@ describe GameUtils do
     it "should return true" do
       GameUtils::valid?(@game_state, Move.new(0,1,0)).should == true
     end
+    
     it "should return true" do
       GameUtils::valid?(@game_state, Move.new(1,0,0)).should == true
     end
@@ -90,17 +94,6 @@ describe GameUtils do
       ref_board[2][2] = GameConstants::WALL
       GameUtils::handle_takes!(@game_state7)
       @game_state7.board.should =~ ref_board
-    end
-  end
-  
-  context "handle_player_takes! is called" do
-    it "should handle the takes for the current player appropriately" do
-      ref_board = Marshal.load(Marshal.dump(@game_state6.board))
-      ref_board[2][1] = 0
-      ref_board[2][2] = 0
-      ref_board[3][2] = 0
-      GameUtils::handle_player_takes!(@game_state6)
-      @game_state6.board.should =~ ref_board
     end
   end
   
@@ -155,6 +148,12 @@ describe GameUtils do
   context "surrounded? is called with a non-surrounded cell" do
     it "it should return false" do
       GameUtils::surrounded?(@game_state3, 4, 4).should == false
+    end
+  end
+
+  context "handle_takes! is called" do
+    it "should update history properly" do
+      # TODO
     end
   end
   

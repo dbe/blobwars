@@ -40,7 +40,6 @@ class RandomValid < Player
     else 
       @last_move = new_move
     end
-    puts @last_move.inspect
     new_move
     
   end

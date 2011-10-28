@@ -1,6 +1,7 @@
 require './lib/game/game_constants'
 
 class GameState
+  TURN_LIMIT = 500
   def initialize(players, height, width)
     @players = players        # the client array
     @turn = 0                 # index into clients array
@@ -19,19 +20,19 @@ class GameState
     end
   end
   
-  attr_accessor :board, :turn, :over, :players, :game_history, :current_player
+  attr_accessor :board, :over, :players, :game_history, :current_player
   
   def rotate_turn!
-    @turn = (@turn + 1) % @players.size
-    @current_player = @players[@turn]
+    @turn += 1
+    @current_player = @players[@turn % @players.size].team
+    @over = true if @turn > TURN_LIMIT
   end
   
   def get_next_player
-    @players[turn]
+    @players[@turn % @players.size]
   end
   
   def apply_move(x, y, player)
-    puts "#{player}@(#{x},#{y})"
     @board[x][y] = player
     @game_history << Move.new(x, y, player)
   end

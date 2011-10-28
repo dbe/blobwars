@@ -15,31 +15,23 @@ class GameRunner
     @initializer = GameInitializer.new()
     @initializer.prepare(@game_state)
 
-    current_turn = 0
-    
+    # TODO
+        
     while !@game_state.over do
-      break if (current_turn+=1) == 500
       # Get the player whose turn it is
       player = @game_state.get_next_player
       
-      begin
-        # Player has not yet eaten
-        food = false
-        
-        # Get client move
-        move = player.get_move(@game_state)
-                
-        # Validate move
-        #TODO - will this break out of the while loop, or the begin/end loop
-        break if !GameUtils.valid?(@game_state, move)
+      # Get client move
+      move = player.get_move(@game_state)
       
-        # Execute move
-        food = true if @game_state.board[move.x][move.y] == GameConstants::FOOD
-        @game_state.apply_move(move.x, move.y, player.team)
-        
-        # Handle any takes
-        GameUtils::handle_takes!(@game_state)
-      end while food
+      # Validate move
+      next if !GameUtils.valid?(@game_state, move)
+      
+      # Apply move
+      @game_state.apply_move(move.x, move.y, player.team)
+      
+      # Handle any takes
+      GameUtils::handle_takes!(@game_state)
       
       # Rotate turn
       @game_state.rotate_turn!

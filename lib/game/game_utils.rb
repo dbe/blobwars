@@ -1,28 +1,32 @@
 require './lib/game/game_state'
 
 module GameUtils
+  NUM_TO_TAKE = 4
+  
   def self.valid?(game_state, move)
-    return false if move.x < 0 || move.x >= game_state.board.size || move.y < 0 || move.y >= game_state.board.first.size
+    # On board condition
+    return false if move.x < 0 || move.x >= game_state.board.size
+    return false if move.y < 0 || move.y >= game_state.board.first.size
+    
+    # Empty space condition
     return false if game_state.board[move.x][move.y] != GameConstants::BLANK
-    return true if move.x + 1 < game_state.board.size && game_state.board[move.x + 1][move.y] == move.team
-    return true if move.x - 1 >= 0 && game_state.board[move.x - 1][move.y] == move.team
-    return true if move.y + 1 < game_state.board.first.size && game_state.board[move.x][move.y + 1] == move.team
-    move.y - 1 >= 0 && game_state.board[move.x][move.y - 1] == move.team
     
-    
+    # Adjacency condition
+    player_is_up_down_right_or_left?(game_state, move)
   end
   
   def self.handle_takes!(game_state)
-    handle_player_takes!(game_state)
-    walls = find_takes(game_state, false)
-    walls.map {|wall| game_state.apply_move(wall.x, wall.y, GameConstants::WALL)}
+    begin
+      takes = handle_player_takes!(game_state, true)
+    end while takes.size > 0
+    
+    handle_player_takes!(game_state, false)
   end
   
-  def self.handle_player_takes!(game_state)
-    begin
-      takes = find_takes(game_state, true)
-      takes.map {|take| game_state.apply_move(take.x, take.y, game_state.current_player)}
-    end while takes.size > 0
+  def self.handle_player_takes!(game_state, current_player)
+    takes = find_takes(game_state, current_player)
+    takes.map {|take| game_state.apply_move(take.x, take.y, current_player ? game_state.current_player : GameConstants::WALL)}
+    takes
   end
   
   def self.find_takes(game_state, current_player)
@@ -38,6 +42,7 @@ module GameUtils
         end
       end
     end
+    
     takes
   end
   
@@ -63,6 +68,13 @@ module GameUtils
       end  
     end
 
-    !counts.empty? && counts.each_value.max >= 4
+    !counts.empty? && counts.each_value.max >= NUM_TO_TAKE
+  end
+  
+  def self.player_is_up_down_right_or_left?(game_state, move)
+    game_state.board[(move.x + 1) % game_state.board.size][move.y] == move.team ||
+    game_state.board[(move.x - 1) % game_state.board.size][move.y] == move.team ||
+    (game_state.board[move.x][(move.y + 1) % game_state.board.first.size] == move.team) ||
+    (game_state.board[move.x][(move.y - 1) % game_state.board.first.size] == move.team)
   end
 end
