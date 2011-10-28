@@ -25,8 +25,8 @@ BlobWars = (function() {
   function RenderQueue() {
     //list of {:time => time in millis in which to run this thing, :callback => function to run}
     this.queue = [];
-    this.add = function(timeToExecute, callback, thisVar) {
-      this.queue.push({time : timeToExecute, callback : callback, thisVar : thisVar, args : Array.prototype.slice.call(arguments, 3)});
+    this.add = function(timeToExecute, f, thisVar) {
+      this.queue.push({time : timeToExecute, f : f, thisVar : thisVar, args : Array.prototype.slice.call(arguments, 3)});
     }
     this.runValidFunctions = function() {
       var timeNow = new Date().getTime();
@@ -35,7 +35,7 @@ BlobWars = (function() {
         //Time to run this function
         if(this.queue[i].time < timeNow){
           var object = this.queue.splice(i, 1)[0];
-          object.callback.apply(object.thisVar, object.args);
+          object.f.apply(object.thisVar, object.args);
         }
       }
     }
@@ -51,7 +51,6 @@ BlobWars = (function() {
     var renderQueue = new RenderQueue();
     var renderQueueIntervalID = setInterval(function(){renderQueue.runValidFunctions.call(renderQueue)}, 50);
     var currentTurn = 1;
-    var playing = false;
     
     function animateDeltas(deltas, delay, callback) {
       var timeNow = new Date().getTime();
@@ -71,16 +70,29 @@ BlobWars = (function() {
       context.clearRect(0, 0, canvasDimensions.x, canvasDimensions.y);
     }
     
-    var printCurrentTurn = function() {
+    var playTurn = function(onComplete) {
       var turn = gameHistory.turns[currentTurn - 1];
-      animateDeltas(turn.deltas, 200, function(){currentTurn++;printCurrentTurn();})
+      animateDeltas(turn.deltas, 200, onComplete)
+    }
+    
+    var play = function() {
+      if(currentTurn <= gameHistory.turns.length)
+      {
+        playTurn(function(){currentTurn++;play();});
+      }
     }
     
     this.playFromBeginning = function() {
       clearBoard();
-      playing = true;
       currentTurn = 1;
-      printCurrentTurn();
+      play();
+    }
+    
+    this.playFromTurn = function(turnNumber) {
+      //init board
+      clearBoard(); //take this out once I have init board working
+      currentTurn = turnNumber;
+      play();
     }
 
   }
