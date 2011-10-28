@@ -6,6 +6,9 @@
 :javascript
   $(document).ready(function() {
     viewer = BlobWars.initialize(gameHistory, 'viewer');
+    $('canvas').click(function() {
+      viewer.playFromBeginning();
+    });
   });
   
  
