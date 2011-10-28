@@ -23,10 +23,11 @@ class GameManager < ActiveRecord::Base
   end
   
   def play
-    history = game_runner.play(clients, self.width, self.height)
-    self.game_histories.create(:move_history => history[:deltas].map do |delta|
-      {'x' => delta.x, 'y' => delta.y, 'team' => delta.team}
-    end, :winner => history[:winner])
+    game_history = game_runner.play(clients, self.width, self.height)
+    p game_history
+    # self.game_histories.create(:move_history => history[:deltas].map do |delta|
+    #      {'x' => delta.x, 'y' => delta.y, 'team' => delta.team}
+   #  end, :winner => history[:winner])
   end
 end
 
