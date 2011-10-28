@@ -49,17 +49,40 @@ BlobWars = (function() {
     var context = canvas.getContext('2d');
     var canvasDimensions = {x : (gameHistory.dimensions.x * scalingFactor.x), y : (gameHistory.dimensions.y * scalingFactor.y) };
     var renderQueue = new RenderQueue();
-    var renderQueueIntervalID = setInterval(function(){renderQueue.runValidFunctions.call(renderQueue)}, 0);
+    var renderQueueIntervalID = setInterval(function(){renderQueue.runValidFunctions.call(renderQueue)}, 50);
+    var currentTurn = 1;
+    var playing = false;
+    
+    function animateDeltas(deltas, delay, callback) {
+      var timeNow = new Date().getTime();
+      for(var i = 0; i < deltas.length; i++)
+      {
+        renderQueue.add(timeNow + (delay * i), paintDelta, this, deltas[i])
+      }
+      renderQueue.add(timeNow + (delay * i), callback, this);
+    }
     
     var paintDelta = function(delta) {
       context.fillStyle = colors[delta.objectID];
       context.fillRect(delta.x * scalingFactor.x, delta.y * scalingFactor.y, scalingFactor.x, scalingFactor.y);
     }
     
-    this.testThing = function() {
-      var timeNow = new Date().getTime();
-      renderQueue.add(timeNow + 500, paintDelta, this, gameHistory.turns[0].deltas[0]);
+    var clearBoard = function() {
+      context.clearRect(0, 0, canvasDimensions.x, canvasDimensions.y);
     }
+    
+    var printCurrentTurn = function() {
+      var turn = gameHistory.turns[currentTurn - 1];
+      animateDeltas(turn.deltas, 200, function(){currentTurn++;printCurrentTurn();})
+    }
+    
+    this.playFromBeginning = function() {
+      clearBoard();
+      playing = true;
+      currentTurn = 1;
+      printCurrentTurn();
+    }
+
   }
   
   return {
@@ -72,65 +95,3 @@ BlobWars = (function() {
     }
   }  
 })();
-
-  // function Viewer(canvas, gameHistory, scalingFactor) {
-    // var context = canvas.getContext('2d');
-    // var canvasDimensions = {x : (gameHistory.dimensions.x * scalingFactor.x), y : (gameHistory.dimensions.y * scalingFactor.y) };
-  //   var currentTurn = 1;
-  //   var playing = false;
-  //   
-  //   function animateDeltas(deltas, i, delay, callback) {
-  //     paintDelta(deltas[i++]);
-  //     if(i < deltas.length)
-  //     {
-  //       setTimeout(animateDeltas, delay, deltas, i, delay, callback);
-  //     }
-  //     else
-  //     {
-  //       currentTurn++;
-  //       setTimeout(callback, delay);
-  //     }
-  //   }
-  //   
-    // function paintDelta(delta) {
-    //   context.fillStyle = colors[delta.objectID];
-    //   context.fillRect(delta.x * scalingFactor.x, delta.y * scalingFactor.y, scalingFactor.x, scalingFactor.y);
-    // }
-  //   
-  //   function play() {
-  //     if(playing) 
-  //     {
-  //       animateDeltas(gameHistory.turns[currentTurn - 1].deltas, 0, 50, play);
-  //     }
-  //   }
-  //   
-  //   // this.paintTurn = function(turnNumber, delayPerDelta) {
-  //   //   this.clearBoard();
-  //   //   var turn = gameHistory.turns[turnNumber - 1];
-  //   //   animateDeltas(turn.deltas, 0, delayPerDelta);
-  //   // }
-  //   
-  //   this.playFromBeginning = function() {
-  //     this.clearBoard();
-  //     currentTurn = 1;
-  //     playing = true;
-  //     play();
-  //   }
-  //   
-  //   //Make this private possibly
-  //   this.clearBoard = function() {
-  //     context.clearRect(0, 0, canvasDimensions.x, canvasDimensions.y);
-  //   }    
-  // }
-  //  
-  // 
-  // return {
-  //       //Returns new Viewer object for the view to use
-  //       initialize : function(gameHistory, divID) {
-  //         if(!validGameHistory){return false};
-  //         var scalingFactor = getScalingFactor(gameHistory.dimensions);
-  //         canvas = constructCanvasElement(gameHistory.dimensions, scalingFactor, divID);
-  //         return new Viewer(canvas, gameHistory, scalingFactor); 
-  //       }
-  // }
-// })();
