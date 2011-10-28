@@ -1,11 +1,14 @@
 class GameManager < ActiveRecord::Base
+  CLIENT_FOLDER "ai"
+  RUNNER_FOLDER "runner"
+  
   has_many :game_histories
   def dimensions
     {'x' => width, 'y' => height}
   end
   
   def game_runner
-    load "runner/#{self.game_runner_klass}.rb"
+    load "#{RUNNER_FOLDER}/#{self.game_runner_klass}.rb"
     Object.const_get(self.game_runner_klass.classify).new
   end
   
@@ -13,7 +16,7 @@ class GameManager < ActiveRecord::Base
     i = 1
     clients = self.game_clients.split.map do |c|
       # Lets reload each AI class for each run.
-      load "ai/#{c}.rb"
+      load "#{CLIENT_FOLDER}/#{c}.rb"
       #create the AI instance with a new id
       Object.const_get(c.classify).new(i += 1)
     end
