@@ -5,9 +5,9 @@ class GameState
 
   def initialize(players, height, width)
     @players = players        # the client array
-    @turn = 0                 # index into clients array
-    @current_player = @players[@turn]
+    @turn = 0                 # turn id
     @over = false
+    @passed_count = 0
     @game_history = []
     
     @board = []
@@ -16,7 +16,6 @@ class GameState
       height.times do
         col << GameConstants::BLANK
       end
-      
       @board << col
     end
   end
@@ -24,22 +23,18 @@ class GameState
   attr_accessor :board, :over, :players, :game_history, :current_player
   
   def rotate_turn!
-    puts "We're at turn #{@turn}"
     @turn += 1
-    @current_player = @players[@turn % @players.size].team
-    @over = true if @turn > TURN_LIMIT
+    @over = true if @turn > TURN_LIMIT || @passed_count == players.size
+    passed_count = 0
+  end
+
+  def player_passed
+    @passed_count += 1
   end
   
-  def get_next_player
-    @players[@turn % @players.size]
+  def apply_move(x, y, tile_id)
+    @board[x][y] = tile_id
+    @game_history << Move.new(x, y, tile_id)
   end
   
-  def apply_move(x, y, player)
-    @board[x][y] = player
-    @game_history << Move.new(x, y, player)
-  end
-  
-  def player_ate?
-    @player_ate
-  end
 end

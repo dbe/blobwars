@@ -14,27 +14,30 @@ class GameRunner
     # Put players on board
     @initializer = GameInitializer.new()
     @initializer.prepare(@game_state)
-
-    # TODO
-        
+ 
     while !@game_state.over do
-      # Get the player whose turn it is
-      player = @game_state.get_next_player
       
-      # Get client move
-      move = player.get_move(@game_state)
+      @game_state.players.each do |player|
+        
+        @game_state.current_player = player.team
+        
+        # Get client move
+        move = player.get_move(@game_state)
 
-      # Validate move
-      if !GameUtils.valid?(@game_state, move)
-        @game_state.rotate_turn!
+        # Validate move
+        if !GameUtils.valid?(@game_state, move)
+          @game_state.player_passed
+          next
+        end
+      
+        # Apply move
+        @game_state.apply_move(move.x, move.y, player.team)
+  
+        # Handle any takes
+        GameUtils::handle_takes!(@game_state)
+      
       end
       
-      # Apply move
-      @game_state.apply_move(move.x, move.y, player.team)
-  
-      # Handle any takes
-      GameUtils::handle_takes!(@game_state)
-  
       # Rotate turn
       @game_state.rotate_turn!
     end
