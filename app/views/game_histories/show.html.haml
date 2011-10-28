@@ -1,24 +1,49 @@
 = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'
-= javascript_include_tag 'viewer.js'
+= javascript_include_tag 'blobWars.js'
+
+#viewer
 
 :javascript
   $(document).ready(function() {
-    !function() {
-      idealResolution = {x : 600, y: 600};
-      gameHistory = #{@json};
-      
-      if(gameHistory.dimensions.x > idealResolution.x || gameHistory.dimensions.y > idealResolution.y)
-      {
-        console.log("Cannot render this game, its resolution is incompatible");
-        return false;
-      }
-      
-      var scalingFactor = {x : Math.floor((idealResolution.x / gameHistory.dimensions.x)), y :Math.floor((idealResolution.y / gameHistory.dimensions.y))};
-      $('body').prepend("<canvas id='history_viewer' width='" + gameHistory.dimensions.x * scalingFactor.x + "' height='" + gameHistory.dimensions.y * scalingFactor.y + "'> Please get a browser which supports canvas, foo </canvas>");
-      $canvas = $('canvas');
-      blobWars($canvas, gameHistory, scalingFactor);
-    }();
+    viewer = BlobWars.initialize(gameHistory, 'viewer');
   });
+  
+ 
+  gameHistory = {
+    dimensions : {x : 20, y: 20},
+    turns : [
+      {
+        playerID : 0,
+        deltas : [
+          {x : 10, y: 10, objectID : 0},
+          {x : 11, y: 11, objectID : 1},
+          {x : 12, y: 12, objectID : 2}
+        ]
+      },
+      {
+        playerID : 1,
+        deltas : [
+          {x : 1, y: 11, objectID : 0},
+          {x : 2, y: 2, objectID : 1}
+        ]
+      },
+      {
+        playerID : 0,
+        deltas : [
+          {x : 19, y: 19, objectID : 0},
+          {x : 20, y: 20, objectID : 1}
+        ]
+      },
+      {
+        playerID : 1,
+        deltas : [
+          {x : 4, y: 4, objectID : 0},
+          {x : 5, y: 5, objectID : 1}
+        ]
+      }
+    ],
+    winner : 0
+  };
 
 %style  
   :sass
