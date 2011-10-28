@@ -52,11 +52,12 @@ BlobWars = (function() {
     var renderQueueIntervalID = setInterval(function(){renderQueue.runValidFunctions.call(renderQueue)}, (1000/60));
     //setInterval(function(){console.log(renderQueue.queue)},50);
     var currentTurn = 1;
-    var delayBetweenTurns = 50;
-    var delayBetweenDeltas = 500;
+    var delayBetweenTurns = 20;
+    var delayBetweenDeltas = 1;
     
     function animateDeltas(deltas, delay, onComplete) {
       var timeNow = new Date().getTime();
+      if(deltas.length === 0){onComplete();}
       for(var i = 0; i < deltas.length; i++)
       {
         //only call onComplete to the final function call
@@ -108,6 +109,10 @@ BlobWars = (function() {
         {
           setTimeout(playTurn, delayBetweenTurns, function(){currentTurn++;play();})
         }
+      }
+      else
+      {
+        console.log("Finished");
       }
     }
     
