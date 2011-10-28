@@ -1,6 +1,6 @@
 BlobWars = (function() {
   var idealResolution = {x : 600, y: 600};
-  var colors = ['red', 'green', 'blue', 'grey', 'purple'];
+  var colors = ['white', 'black', 'green', 'blue', 'red', 'purple'];
   
   
   function validGameHistory(gameHistory) {
