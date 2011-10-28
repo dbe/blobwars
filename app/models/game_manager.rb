@@ -1,6 +1,6 @@
 class GameManager < ActiveRecord::Base
-  CLIENT_FOLDER "ai"
-  RUNNER_FOLDER "runner"
+  CLIENT_FOLDER = "ai"
+  RUNNER_FOLDER = "runner"
   
   has_many :game_histories
   def dimensions
