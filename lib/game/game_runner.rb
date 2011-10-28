@@ -6,6 +6,7 @@ require 'game/game_utils'
 require 'game/turn'
 require 'game/delta'
 
+puts "Getting game_runner"
 
 class GameRunner
   TURN_LIMIT = 500

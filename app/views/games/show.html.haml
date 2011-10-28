@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Move history:
+  = @game.move_history
+%p
+  %b Game runner klass:
+  = @game.game_runner_klass
+%p
+  %b Width:
+  = @game.width
+%p
+  %b Height:
+  = @game.height
+
+= link_to 'Edit', edit_game_path(@game)
+\|
+= link_to 'Back', games_path

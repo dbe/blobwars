@@ -1,11 +1,12 @@
 BlobWars::Application.routes.draw do
-  resources :game_managers do
-    post 'play', :as => 'play', :on => :member
+  resources :games
+
+  resources :game_plays
+
+  resources :players do
+    resources :ais
   end
-
-  resources :game_histories
-
-  root :to => "game_managers#index"
+  root :to => "players#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Logic:
+  = @ai.logic
+%p
+  %b Player:
+  = @ai.player
+%p
+  %b Name:
+  = @ai.name
+%p
+  %b Active?
+  = @ai.active
+
+= link_to 'Edit', edit_player_ai_path(@ai.player, @ai)
+\|
+= link_to 'Back', player_ais_path

@@ -4,8 +4,9 @@ require 'game/game_state.rb'
 require 'game/move.rb'
 
 class RandomValid < Player
+  attr_reader :team
   def initialize team
-    super team
+    @team = team
     @last_move = nil
   end
   
