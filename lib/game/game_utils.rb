@@ -25,7 +25,7 @@ module GameUtils
   
   def self.handle_player_takes!(game_state, current_player)
     takes = find_takes(game_state, current_player)
-    takes.map {|take| game_state.apply_move(take.x, take.y, current_player ? game_state.turn : GameConstants::WALL)}
+    takes.map {|take| game_state.apply_move(take.x, take.y, current_player ? game_state.current_player : GameConstants::WALL)}
     takes
   end
   
@@ -37,7 +37,7 @@ module GameUtils
     board.each_index do |i|
       board.first.each_index do |j|
         if is_player?(board[i][j]) 
-          next if current_player && board[i][j] == game_state.turn
+          next if current_player && board[i][j] == game_state.current_player
           takes << Coordinate.new(i, j) if surrounded?(game_state, i, j)
         end
       end
@@ -51,23 +51,30 @@ module GameUtils
   end
   
   def self.surrounded?(game_state, x, y)
-    counts = [0] * game_state.players.size
-    player = game_state.board[x][y]
+    counts = {}
+    counts.default = 0
+    team = game_state.board[x][y]
     
     -1.upto(1) do |i|
       -1.upto(1) do |j|
-        surrounding_player = game_state.board[(x + i) % game_state.board.size][(y + j) % game_state.board.first.size]
-        counts[surrounding_player] += 1 if is_player?(surrounding_player) && player != surrounding_player
+        c_x = x + i
+        c_y = y + j
+        next if c_x < 0 || c_x >= game_state.board.size
+        next if c_y < 0 || c_y >= game_state.board.first.size
+        surrounding_team = game_state.board[c_x][c_y]
+        if is_player?(surrounding_team) && team != surrounding_team
+          counts[surrounding_team] += 1
+        end
       end  
     end
 
-    counts.each.max >= NUM_TO_TAKE
+    !counts.empty? && counts.each_value.max >= NUM_TO_TAKE
   end
   
   def self.player_is_up_down_right_or_left?(game_state, move)
-    game_state.board[(move.x + 1) % game_state.board.size][move.y] == game_state.turn ||
-    game_state.board[(move.x - 1) % game_state.board.size][move.y] == game_state.turn ||
-    (game_state.board[move.x][(move.y + 1) % game_state.board.first.size] == game_state.turn) ||
-    (game_state.board[move.x][(move.y - 1) % game_state.board.first.size] == game_state.turn)
+    game_state.board[(move.x + 1) % game_state.board.size][move.y] == move.team ||
+    game_state.board[(move.x - 1) % game_state.board.size][move.y] == move.team ||
+    (game_state.board[move.x][(move.y + 1) % game_state.board.first.size] == move.team) ||
+    (game_state.board[move.x][(move.y - 1) % game_state.board.first.size] == move.team)
   end
 end
