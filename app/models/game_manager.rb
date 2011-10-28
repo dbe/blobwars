@@ -4,11 +4,12 @@ class GameManager < ActiveRecord::Base
     {'x' => width, 'y' => height}
   end
   
-  def play
-    #make sure to load the classes file, then instantiate an instance of it
+  def game_runner
     load "runner/#{self.game_runner_klass}.rb"
-    game_runner_instance = Object.const_get(self.game_runner_klass.classify).new
-    puts "game runner instance is #{game_runner_instance.class}"
+    Object.const_get(self.game_runner_klass.classify).new
+  end
+  
+  def clients
     i = 1
     clients = self.game_clients.split.map do |c|
       # Lets reload each AI class for each run.
@@ -16,9 +17,9 @@ class GameManager < ActiveRecord::Base
       #create the AI instance with a new id
       Object.const_get(c.classify).new(i += 1)
     end
-    
-    
-    history = game_runner_instance.play(clients, self.width, self.height)
+  end
+  def play
+    history = game_runner.play(clients, self.width, self.height)
     self.game_histories.create(:move_history => history[:deltas].map do |delta|
       {'x' => delta.x, 'y' => delta.y, 'team' => delta.team}
     end, :winner => history[:winner])
