@@ -34,7 +34,7 @@ class GameRunner
 
           # Handle any takes
           GameUtils::handle_takes!(@game_state, turn)
-        elseß
+        else
           @game_state.player_passed
         end
       
