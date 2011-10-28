@@ -25,13 +25,11 @@ class Game < ActiveRecord::Base
   AIS_PER_GAME = 4
   
   def self.trigger
-    puts "Trigger?"
     Ai.where(:active => true).all(:group => :player_id).tap do |active_ais|
       if active_ais.size == AIS_PER_GAME
         active_ais.each do |ai|
           ai.update_attribute(:active, false)
         end
-        puts "yes."
         return Game.create({:ais => active_ais, 
           :game_runner_klass => DEFAULT_GAME_RUNNER, 
           :width => DEFAULT_WIDTH, 
@@ -40,13 +38,11 @@ class Game < ActiveRecord::Base
       else
       end
     end
-    puts "No trigger"
     nil
   end
   
   # Call play once all associations have been set up
   after_create do
-    puts "After create."
     load "#{RUNNER_FOLDER}/#{self.game_runner_klass}.rb"
     game_runner = Object.const_get(self.game_runner_klass.classify).new
     
@@ -54,12 +50,9 @@ class Game < ActiveRecord::Base
     
     clients = ais.map do |ai|
       # create a blank object for this player.
-      puts "About to create class..."
       aiu = AiBase.new(i += 1).tap{|o| o.class_eval ai.logic }
-      puts "done creating class."
       aiu
     end
-    puts "Clients are #{clients.inspect}"
     self.move_history = game_runner.play(clients, self.width, self.height)
   end
   
