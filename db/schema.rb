@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(:version => 20111026221735) do
 
   create_table "game_histories", :force => true do |t|
     t.text     "move_history"
-    t.string   "winner"
+    t.string   "winners"
     t.integer  "game_manager_id"
     t.datetime "created_at"
     t.datetime "updated_at"
