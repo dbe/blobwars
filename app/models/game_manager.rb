@@ -33,8 +33,8 @@ class GameManager < ActiveRecord::Base
     #      {'x' => delta.x, 'y' => delta.y, 'team' => delta.team}
     #  end, :winner => history[:winner])
     self.game_histories.create(:move_history => game_history[:turns].map do |turn|
-      {'team' => turn.team, 'deltas' => turn.deltas.map do |delta|
-        {'x' => delta.x, 'y' => delta.y, 'object_id' => delta.object_id}
+      {'playerID' => turn.team, 'deltas' => turn.deltas.map do |delta|
+        {'x' => delta.x, 'y' => delta.y, 'objectID' => delta.object_id}
       end}
     end,
     :winners => game_history[:winners])

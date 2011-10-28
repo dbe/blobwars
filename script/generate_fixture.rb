@@ -9,4 +9,4 @@ GameManager.create(:game_runner_klass => "blobular", :game_clients => "human_pla
 :move_history => Array.new(30) do
   {'x' => rand(20), 'y' => rand(20), 'team' => rand(3)}
 end,
-:winner => "danny")
+:winners => [0])
