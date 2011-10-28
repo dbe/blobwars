@@ -1,5 +1,6 @@
 require 'game/game_constants'
 require 'game/game_state'
+require 'game/game_initializer'
 require 'game/game_utils'
 require 'game/move'
 
@@ -11,8 +12,9 @@ class GameRunner
     @game_state = GameState.new(players, height, width)
     
     # Put players on board
-    # TODO
-    
+    @initializer = GameInitializer.new()
+    @initializer.prepare(@game_state)
+
     current_turn = 0
     
     while !@game_state.over do
@@ -42,7 +44,7 @@ class GameRunner
       # Rotate turn
       @game_state.rotate_turn!
     end
-    puts "game state is #{@game_state}"
+    #puts "game state is #{@game_state.inspect}"
     {:deltas => @game_state.game_history, :winner => 'danny'}
   end
   

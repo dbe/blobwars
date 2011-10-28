@@ -4,6 +4,7 @@ class GameState
   def initialize(players, height, width)
     @players = players        # the client array
     @turn = 0                 # index into clients array
+    @current_player = @players[@turn]
     @over = false
     @game_history = []
     
@@ -18,10 +19,11 @@ class GameState
     end
   end
   
-  attr_accessor :board, :turn, :over, :players, :game_history
+  attr_accessor :board, :turn, :over, :players, :game_history, :current_player
   
   def rotate_turn!
     @turn = (@turn + 1) % @players.size
+    @current_player = @players[@turn]
   end
   
   def get_next_player
@@ -29,6 +31,7 @@ class GameState
   end
   
   def apply_move(x, y, player)
+    puts "#{player}@(#{x},#{y})"
     @board[x][y] = player
     @game_history << Move.new(x, y, player)
   end

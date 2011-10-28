@@ -62,25 +62,25 @@ describe GameUtils do
   
   context "valid? is called with an invalid move" do
     it "should return false" do
-      GameUtils::valid?(@game_state, Coordinate.new(0,0)).should == false
+      GameUtils::valid?(@game_state, Move.new(0,0,0)).should == false
     end
     it "should return false" do
-      GameUtils::valid?(@game_state, Coordinate.new(2,2)).should == false
+      GameUtils::valid?(@game_state, Move.new(2,2,0)).should == false
     end
     it "should return false" do
-      GameUtils::valid?(@game_state, Coordinate.new(4,3)).should == false
+      GameUtils::valid?(@game_state, Move.new(4,3,0)).should == false
     end
     it "should return false" do
-      GameUtils::valid?(@game_state, Coordinate.new(1,1)).should == false
+      GameUtils::valid?(@game_state, Move.new(1,1,0)).should == false
     end
   end
   
   context "valid? is called with a valid move" do
     it "should return true" do
-      GameUtils::valid?(@game_state, Coordinate.new(0,1)).should == true
+      GameUtils::valid?(@game_state, Move.new(0,1,0)).should == true
     end
     it "should return true" do
-      GameUtils::valid?(@game_state, Coordinate.new(1,0)).should == true
+      GameUtils::valid?(@game_state, Move.new(1,0,0)).should == true
     end
   end
   
@@ -155,13 +155,6 @@ describe GameUtils do
   context "surrounded? is called with a non-surrounded cell" do
     it "it should return false" do
       GameUtils::surrounded?(@game_state3, 4, 4).should == false
-    end
-  end
-  
-  context "handle_takes! is called" do
-    it "should update history properly" do
-      GameUtils::handle_takes!(@game_state7)
-      @game_state7.board.should =~ ref_board
     end
   end
   
