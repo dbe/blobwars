@@ -13,7 +13,7 @@ class GameManager < ActiveRecord::Base
   end
   
   def clients
-    i = 1
+    i = -1
     clients = self.game_clients.split.map do |c|
       # Lets reload each AI class for each run.
       load "#{CLIENT_FOLDER}/#{c}.rb"
@@ -21,13 +21,13 @@ class GameManager < ActiveRecord::Base
       Object.const_get(c.classify).new(i += 1)
     end
   end
+  
   def play
     history = game_runner.play(clients, self.width, self.height)
     self.game_histories.create(:move_history => history[:deltas].map do |delta|
       {'x' => delta.x, 'y' => delta.y, 'team' => delta.team}
     end, :winner => history[:winner])
   end
-  
 end
 
 # == Schema Information

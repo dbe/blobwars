@@ -16,6 +16,7 @@ class GameState
       height.times do
         col << GameConstants::BLANK
       end
+      
       @board << col
     end
   end
@@ -24,6 +25,8 @@ class GameState
   
   def rotate_turn!
     @turn += 1
+    puts "Passed count : #{@passed_count}"
+    puts "Turn : #{@turn}"
     @over = true if @turn > TURN_LIMIT || @passed_count == players.size
     passed_count = 0
   end

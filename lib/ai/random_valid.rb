@@ -15,6 +15,7 @@ class RandomValid < Player
       game_state.board.each_index do |i|
         game_state.board[i].each_index do |j|
           if game_state.board[i][j] == @team
+            puts "found myself at #{i}, #{j}"
             @last_move = Move.new(i, j, @team)
           end
         end  
