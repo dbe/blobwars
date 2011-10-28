@@ -25,8 +25,6 @@ class GameState
   
   def rotate_turn!
     @turn += 1
-    puts "Passed count : #{@passed_count}"
-    puts "Turn : #{@turn}"
     @over = true if @turn > TURN_LIMIT || @passed_count == players.size
     passed_count = 0
   end
@@ -35,9 +33,10 @@ class GameState
     @passed_count += 1
   end
   
-  def apply_move(x, y, tile_id)
-    @board[x][y] = tile_id
-    @game_history << Move.new(x, y, tile_id)
+  def apply_move_and_return_turn(move, object_id)
+    @board[move.x][move.y] = move.team
+    turn = Turn.new(move.team)
+    turn.deltas << Delta.new(move.x, move.y, object_id)
+    turn
   end
-  
 end

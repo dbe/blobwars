@@ -3,6 +3,34 @@ require './lib/game/game_state'
 module GameUtils
   NUM_TO_TAKE = 4
   
+  def self.find_winners(game_state)
+    scores = Hash.new
+    game_state.board.each do |col|
+      col.each do |player_id|
+        next if player_id == GameConstants::BLANK
+        next if player_id == GameConstants::WALL
+        
+        if scores[player_id]
+          scores[player_id] += 1
+        else
+          scores[player_id] = 1
+        end
+      end
+    end
+    
+    max = 0
+    scores.values.each do |count|
+      max = count if count > max
+    end
+    
+    winners = []
+    scores.each_pair do |player_id, count|
+      winners << player_id if count == max
+    end
+    
+    winners
+  end
+  
   def self.valid?(game_state, move)
     # On board condition
     return false if move.x < 0 || move.x >= game_state.board.size
@@ -15,17 +43,22 @@ module GameUtils
     player_is_up_down_right_or_left?(game_state, move)
   end
   
-  def self.handle_takes!(game_state)
+  def self.handle_takes!(game_state, turn)
     begin
-      takes = handle_player_takes!(game_state, true)
+      takes = handle_player_takes!(game_state, turn, true)
     end while takes.size > 0
     
-    handle_player_takes!(game_state, false)
+    handle_player_takes!(game_state, turn, false)
   end
   
-  def self.handle_player_takes!(game_state, current_player)
+  def self.handle_player_takes!(game_state, turn, current_player)
     takes = find_takes(game_state, current_player)
-    takes.map {|take| game_state.apply_move(take.x, take.y, current_player ? game_state.current_player : GameConstants::WALL)}
+    takes.each do |take|
+      object_id = current_player ? game_state.current_player : GameConstants::WALL
+      turn.deltas << Delta.new(take.x, take.y, object_id)
+      game_state.board[take.x][take.y] = object_id
+    end
+    
     takes
   end
   
