@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Ai:
+  = @game_play.ai
+%p
+  %b Game:
+  = @game_play.game
+%p
+  %b Winner:
+  = @game_play.winner
+
+= link_to 'Edit', edit_game_play_path(@game_play)
+\|
+= link_to 'Back', game_plays_path

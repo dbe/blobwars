@@ -1,0 +1,23 @@
+%h1 Listing ais
+
+%table
+  %tr
+    %th Logic
+    %th Player
+    %th Name
+    %th
+    %th
+    %th
+
+  - @ais.each do |ai|
+    %tr
+      %td= ai.logic
+      %td= ai.player
+      %td= ai.name
+      %td= link_to 'Show', [ai.player, ai]
+      %td= link_to 'Edit', edit_player_ai_path(ai.player, ai)
+      %td= link_to 'Destroy', [ai.player,ai], :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Ai', new_player_ai_path(@player)

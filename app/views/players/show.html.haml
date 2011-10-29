@@ -1,0 +1,14 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @player.name
+%p
+  %b AIs:
+  - @player.ais.each do |ai|
+    = link_to ai.name.capitalize, [@player, ai]
+%p= link_to 'New Ai', new_player_ai_path(@player)
+
+= link_to 'Edit', edit_player_path(@player)
+\|
+= link_to 'Back', players_path

@@ -1,0 +1,23 @@
+%h1 Listing game_plays
+
+%table
+  %tr
+    %th Ai
+    %th Game
+    %th Winner
+    %th
+    %th
+    %th
+
+  - @game_plays.each do |game_play|
+    %tr
+      %td= game_play.ai
+      %td= game_play.game
+      %td= game_play.winner
+      %td= link_to 'Show', game_play
+      %td= link_to 'Edit', edit_game_play_path(game_play)
+      %td= link_to 'Destroy', game_play, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Game play', new_game_play_path

@@ -10,21 +10,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111026221735) do
+ActiveRecord::Schema.define(:version => 20111028205412) do
 
-  create_table "game_histories", :force => true do |t|
-    t.text     "move_history"
-    t.string   "winners"
-    t.integer  "game_manager_id"
+  create_table "ais", :force => true do |t|
+    t.boolean  "active",     :default => false, :null => false
+    t.text     "logic"
+    t.integer  "player_id"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "game_managers", :force => true do |t|
+  create_table "game_plays", :force => true do |t|
+    t.integer  "ai_id"
+    t.integer  "game_id"
+    t.boolean  "winner"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "games", :force => true do |t|
+    t.text     "move_history"
     t.string   "game_runner_klass"
-    t.string   "game_clients"
     t.integer  "width"
     t.integer  "height"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "players", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
