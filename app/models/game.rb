@@ -64,18 +64,7 @@ class Game < ActiveRecord::Base
   end
   
   def jsonify
-    {
-      'turns' => move_history[:turns].map do |turn|
-        {'playerID' => turn.team,
-        'deltas' => turn.deltas.map do |delta|
-          {'x' => delta.x,
-          'y' => delta.y,
-          'objectID' => delta.object_id}
-        end}
-      end,
-      'dimensions' => move_history[:dimensions],
-      'winner' => move_history[:winners]
-    }.to_json
+    move_history.to_json
   end
   
   # class GameManager < ActiveRecord::Base

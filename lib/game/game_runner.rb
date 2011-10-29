@@ -53,7 +53,21 @@ class GameRunner
     winners = GameUtils::find_winners(@game_state)
     #puts "#{@game_state.game_history.inspect}"
     #puts "game state is #{@game_state.board.inspect}"
-    {:turns => @game_state.game_history, :dimensions => {:x => width, :y => height}, :winners => winners}
+    
+    { :turns => @game_state.game_history.map do |turn|
+      {
+        'playerID' => turn.team, 'deltas' => turn.deltas.map do |delta|
+        {
+          'x' => delta.x,
+          'y' => delta.y,
+          'objectID' => delta.object_id
+        }
+        end
+      }
+      end, 
+      :dimensions => {:x => width, :y => height}, 
+      :winners => winners
+    }
   end
   
 end
