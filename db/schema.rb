@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(:version => 20111028205412) do
 
   create_table "ais", :force => true do |t|
-    t.boolean  "active"
+    t.boolean  "active",     :default => false, :null => false
     t.text     "logic"
     t.integer  "player_id"
     t.string   "name"
