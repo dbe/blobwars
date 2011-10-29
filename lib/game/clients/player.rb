@@ -49,7 +49,9 @@ class Player
     end
     territory_list
   end
-    
+
+  private
+  
   def add_direction(move, direction)
     Move.new(move.x + direction.x, move.y + direction.y, move.team)
   end
