@@ -28,7 +28,7 @@ class GameRunner
         move = player.get_move(@game_state)
 
         # Validate move
-        if GameUtils.valid?(@game_state, move)
+        if move != nil && GameUtils.valid?(@game_state, move)
           # Apply move
           @game_state.board.player!(move.x, move.y, move.team)
 
@@ -50,8 +50,8 @@ class GameRunner
     end
     
     winners = GameUtils::find_winners(@game_state)
-    #puts "#{@game_state.game_history.inspect}"
-    #puts "game state is #{@game_state.board.inspect}"
+    puts "#{@game_state.game_history.inspect}"
+    puts "game state is #{@game_state.board.inspect}"
     {:turns => @game_state.game_history, :dimensions => {:x => width, :y => height}, :winners => winners}
   end
   
