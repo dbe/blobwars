@@ -135,7 +135,7 @@ BlobWars = (function() {
     
     this.getDelayBetweenTurns = function() {
       return delayBetweenTurns;
-    }
+    }    
   }
   
   return {
