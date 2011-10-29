@@ -5,13 +5,18 @@
   = @ai.logic
 %p
   %b Player:
-  = @ai.player
+  = link_to @ai.player.name, @ai.player
 %p
-  %b Name:
+  %b AI Name:
   = @ai.name
 %p
   %b Active?
   = @ai.active
+- unless @ai.games.empty?
+  %p
+    %b Games
+    -@ai.games.each_with_index do |game, index|
+      = link_to "Game ##{index}", game
 
 = link_to 'Edit', edit_player_ai_path(@ai.player, @ai)
 \|
