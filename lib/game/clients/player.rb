@@ -14,7 +14,7 @@ class Player
   def get_move(game_state)
     raise "Get move is abstract and must be overridden"
   end
-  
+
   # Provides the list of all moves from one position
   def get_possible_moves(game_state, position)
     position_list = []
@@ -26,7 +26,7 @@ class Player
     end
     position_list
   end
-  
+
   # Provides all the possible moves available for the player
   def get_all_possible_moves(game_state)
     territory_list = get_team_territories(game_state, @team)
@@ -36,7 +36,7 @@ class Player
     end
     position_list
   end
-  
+
   # Provides the list of all territories for the specified team
   def get_team_territories(game_state, team)
     territory_list = []
