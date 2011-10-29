@@ -1,3 +1,4 @@
+require 'game/game_state.rb'
 class AiBase
   attr_reader :team
   
