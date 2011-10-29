@@ -19,27 +19,29 @@ class GameRunner
     @initializer.prepare(@game_state)
  
     while !@game_state.over do
-      @game_state.players.each_index do |object_id|
-        puts object_id
+      @game_state.players.each do |player|
         
-        # Set current player -- used elsewhere
-        @game_state.current_player = players[object_id].team
-        
+        turn = Turn.new(player.team)
+        @game_state.board.deltas = []
+        @game_state.current_player = player
+      
         # Get player move
-        move = players[object_id].get_move(@game_state)
+        move = player.get_move(@game_state)
 
         # Validate move
-        if !GameUtils.valid?(@game_state, move)
+        if GameUtils.valid?(@game_state, move)
+          # Apply move
+          @game_state.board.player!(move.x, move.y, move.team)
+
+          # Handle any takes
+          GameUtils::handle_takes!(@game_state, turn)
+        else
           @game_state.player_passed
-          next
         end
       
-        # Apply move
-        turn = @game_state.apply_move_and_return_turn(move, object_id)
-  
-        # Handle any takes
-        GameUtils::handle_takes!(@game_state, turn)
-        
+        # Save and Reset deltas
+        turn.deltas = @game_state.board.deltas
+          
         # Save turn
         @game_state.game_history << turn
       end
@@ -49,8 +51,8 @@ class GameRunner
     end
     
     winners = GameUtils::find_winners(@game_state)
-    
-    # puts "game state is #{@game_state.board[1]}"
+    #puts "#{@game_state.game_history.inspect}"
+    #puts "game state is #{@game_state.board.inspect}"
     {:turns => @game_state.game_history, :dimensions => {:x => width, :y => height}, :winners => winners}
   end
   

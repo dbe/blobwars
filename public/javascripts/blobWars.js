@@ -1,6 +1,6 @@
 BlobWars = (function() {
   var idealResolution = {x : 600, y: 600};
-  var colors = ['red', 'green', 'blue', 'grey', 'purple'];
+  var colors = ['white', 'black', 'green', 'blue', 'red', 'purple'];
   
   
   function validGameHistory(gameHistory) {
@@ -49,27 +49,35 @@ BlobWars = (function() {
     var context = canvas.getContext('2d');
     var canvasDimensions = {x : (gameHistory.dimensions.x * scalingFactor.x), y : (gameHistory.dimensions.y * scalingFactor.y) };
     var renderQueue = new RenderQueue();
-    var renderQueueIntervalID = setInterval(function(){renderQueue.runValidFunctions.call(renderQueue)}, 50);
+    var renderQueueIntervalID = setInterval(function(){renderQueue.runValidFunctions.call(renderQueue)}, (1000/60));
+    //setInterval(function(){console.log(renderQueue.queue)},50);
     var currentTurn = 1;
+    var delayBetweenTurns = 20;
+    var delayBetweenDeltas = 1;
     
     function animateDeltas(deltas, delay, onComplete) {
       var timeNow = new Date().getTime();
+      if(deltas.length === 0){onComplete();}
       for(var i = 0; i < deltas.length; i++)
       {
         //only call onComplete to the final function call
         if(i < deltas.length - 1)
         {
-          renderQueue.add(timeNow + (delay * i), paintDelta, this, deltas[i])          
+          renderQueue.add(timeNow + (delay * i), paintDelta, this, deltas[i]);
         }
         else
-        {
-          renderQueue.add(timeNow + (delay * i), paintDelta, this, deltas[i], onComplete)
+        {      
+          renderQueue.add(timeNow + (delay * i), paintDelta, this, deltas[i], onComplete);
         }
       }
     }
     
     var paintDelta = function(delta, onComplete) {
       context.fillStyle = colors[delta.objectID];
+      if(!spaceIsEmpty(delta.x, delta.y))
+      {
+        console.log("Would have shown capture animation");
+      }
       context.fillRect(delta.x * scalingFactor.x, delta.y * scalingFactor.y, scalingFactor.x, scalingFactor.y);
       onComplete && onComplete();
     }
@@ -78,15 +86,33 @@ BlobWars = (function() {
       context.clearRect(0, 0, canvasDimensions.x, canvasDimensions.y);
     }
     
+    //Give in game coords
+    var spaceIsEmpty = function(x,y) {
+      var data = context.getImageData(x * scalingFactor.x, y * scalingFactor.y, 1, 1).data
+      //each pixel value is 255(white) or the alpha value is 0 (fully transparent)
+      return (data[0] + data[1] + data[2] === 765) || (data[3] == 0)
+    }
+    
     var playTurn = function(onComplete) {
       var turn = gameHistory.turns[currentTurn - 1];
-      animateDeltas(turn.deltas, 200, onComplete)
+      animateDeltas(turn.deltas, delayBetweenDeltas, onComplete)
     }
     
     var play = function() {
       if(currentTurn <= gameHistory.turns.length)
       {
-        playTurn(function(){currentTurn++;play();});
+        if(delayBetweenTurns == 0) 
+        {
+          playTurn(function(){currentTurn++;play();});
+        }
+        else
+        {
+          setTimeout(playTurn, delayBetweenTurns, function(){currentTurn++;play();})
+        }
+      }
+      else
+      {
+        console.log("Finished");
       }
     }
     
@@ -102,7 +128,14 @@ BlobWars = (function() {
       currentTurn = turnNumber;
       play();
     }
-
+    
+    this.setDelayBetweenTurns = function(millis) {
+      delayBetweenTurns = millis;
+    }
+    
+    this.getDelayBetweenTurns = function() {
+      return delayBetweenTurns;
+    }
   }
   
   return {
