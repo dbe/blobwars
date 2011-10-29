@@ -1,18 +1,55 @@
-%p#notice= notice
+= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'
+= javascript_include_tag 'blobWars.js'
 
-%p
-  %b Move history:
-  = @game.move_history
-%p
-  %b Game runner klass:
-  = @game.game_runner_klass
-%p
-  %b Width:
-  = @game.width
-%p
-  %b Height:
-  = @game.height
+#viewer
 
-= link_to 'Edit', edit_game_path(@game)
-\|
-= link_to 'Back', games_path
+:javascript
+  $(document).ready(function() {
+    gameHistory = #{@game.jsonify}
+    viewer = BlobWars.initialize(gameHistory, 'viewer');
+    $('canvas').click(function() {
+      viewer.playFromBeginning();
+    });
+  });
+  
+ 
+  // gameHistory = {
+  //     dimensions : {x : 20, y: 20},
+  //     turns : [
+  //       {
+  //         playerID : 0,
+  //         deltas : [
+  //           {x : 0, y: 0, objectID : 0},
+  //           {x : 0, y: 1, objectID : 0},
+  //           {x : 0, y: 2, objectID : 0}
+  //         ]
+  //       },
+  //       {
+  //         playerID : 1,
+  //         deltas : [
+  //           {x : 1, y: 0, objectID : 1},
+  //           {x : 1, y: 1, objectID : 1}
+  //         ]
+  //       },
+  //       {
+  //         playerID : 0,
+  //         deltas : [
+  //           {x : 2, y: 0, objectID : 0},
+  //           {x : 2, y: 1, objectID : 0}
+  //         ]
+  //       },
+  //       {
+  //         playerID : 1,
+  //         deltas : [
+  //           {x : 4, y: 4, objectID : 1},
+  //           {x : 5, y: 5, objectID : 1}
+  //         ]
+  //       }
+  //     ],
+  //     winner : 0
+  //   };
+
+%style  
+  :sass
+    canvas
+      border: 1px solid

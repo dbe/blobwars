@@ -16,13 +16,18 @@ class Game < ActiveRecord::Base
   has_many :ais, :through => :game_plays
   
   validate :width, :presence => true
-  validate :height, :presence => true  
+  validate :height, :presence => true
+  serialize :move_history
 
   DEFAULT_WIDTH = 20;
   DEFAULT_HEIGHT = 20;
   DEFAULT_GAME_RUNNER = 'blobular'
   RUNNER_FOLDER = 'runner'
   AIS_PER_GAME = 4
+  
+  def dimensions
+    {'x' => width, 'y' => height}
+  end
   
   def self.trigger
     Ai.where(:active => true).all(:group => :player_id).tap do |active_ais|
@@ -42,22 +47,35 @@ class Game < ActiveRecord::Base
   end
   
   # Call play once all associations have been set up
-  after_create do
+  before_create do
     load "#{RUNNER_FOLDER}/#{self.game_runner_klass}.rb"
     game_runner = Object.const_get(self.game_runner_klass.classify).new
     
-    i = 0;
-    
     clients = ais.map do |ai|
       # create a blank object for this player.
-      aiu = AiBase.new(i += 1).tap{|o| o.class_eval ai.logic }
-      aiu
+      AiBase.new(ai.id).tap{|o| o.class_eval ai.logic }
     end
     self.move_history = game_runner.play(clients, self.width, self.height)
+    game_plays.where(:ai_id => move_history[:winners]).each{|winner| winner.update_attribute(:winner => true)}
   end
   
   def winner
     game_play.where(:winner => true).ai
+  end
+  
+  def jsonify
+    {
+      'turns' => move_history[:turns].map do |turn|
+        {'playerID' => turn.team,
+        'deltas' => turn.deltas.map do |delta|
+          {'x' => delta.x,
+          'y' => delta.y,
+          'objectID' => delta.object_id}
+        end}
+      end,
+      'dimensions' => move_history[:dimensions],
+      'winner' => move_history[:winners]
+    }.to_json
   end
   
   # class GameManager < ActiveRecord::Base
