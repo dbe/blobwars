@@ -6,7 +6,7 @@ BlobWars::Application.routes.draw do
   resources :players do
     resources :ais
   end
-  root :to => "players#index"
+  root :to => "players#homepage"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -80,4 +80,7 @@ class PlayersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def homepage
+  end
 end
