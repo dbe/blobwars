@@ -1,4 +1,3 @@
-require './lib/game/game_constants'
 require './lib/game/game_board'
 
 class GameState

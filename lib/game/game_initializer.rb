@@ -3,6 +3,10 @@ require './lib/game/game_utils'
 require './lib/game/move'
 
 class GameInitializer
+  
+  # Can we make this an abstract class and allow
+  # Different extensions to specify how to put them on the board?
+  
   def prepare(game_state)
     player_count = game_state.players.size
     width = game_state.board.width
