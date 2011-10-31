@@ -3,13 +3,13 @@
 #left
 #right
 #content
-  %h1 BlobWars!
+  #player
+    %h1#player-header Player:
+    %h3#player-name Player Name
   #viewer
   #control-panel
-    = label_tag('turn-delay', 'Delay between turns:');
-    = text_field_tag('turn-delay')
-    = label_tag('delta-delay', 'Delay between deltas:');
-    = text_field_tag('delta-delay')
+    = label_tag('playback-speed', 'Playback Speed:');
+    = text_field_tag('playback-speed')
 
 :javascript
   $(document).ready(function() {
@@ -17,45 +17,48 @@
     viewer = BlobWars.initialize(gameHistory, 'viewer');
     $('canvas').click(function() {
       viewer.playFromBeginning();
-    });
+    });      
   });
   
  
   // gameHistory = {
-  //     dimensions : {x : 20, y: 20},
-  //     turns : [
-  //       {
-  //         playerID : 0,
-  //         deltas : [
-  //           {x : 0, y: 0, objectID : 0},
-  //           {x : 0, y: 1, objectID : 0},
-  //           {x : 0, y: 2, objectID : 0}
-  //         ]
-  //       },
-  //       {
-  //         playerID : 1,
-  //         deltas : [
-  //           {x : 1, y: 0, objectID : 1},
-  //           {x : 1, y: 1, objectID : 1}
-  //         ]
-  //       },
-  //       {
-  //         playerID : 0,
-  //         deltas : [
-  //           {x : 2, y: 0, objectID : 0},
-  //           {x : 2, y: 1, objectID : 0}
-  //         ]
-  //       },
-  //       {
-  //         playerID : 1,
-  //         deltas : [
-  //           {x : 4, y: 4, objectID : 1},
-  //           {x : 5, y: 5, objectID : 1}
-  //         ]
-  //       }
-  //     ],
-  //     winner : 0
-  //   };
+  //         dimensions : {x : 20, y: 20},
+  //         turns : [
+  //           {
+  //             playerID : 0,
+  //             deltas : [
+  //               {x : 0, y: 0, objectID : 2},
+  //               {x : 0, y: 1, objectID : 2},
+  //               {x : 0, y: 2, objectID : 2},
+  //               {x : 10, y: 10, objectID : 2}
+  //             ]
+  //           },
+  //           {
+  //             playerID : 1,
+  //             deltas : [
+  //               {x : 1, y: 0, objectID : 3},
+  //               {x : 1, y: 0, objectID : 3},
+  //               {x : 1, y: 1, objectID : 3},
+  //               {x : 10, y: 10, objectID : 3}
+  //             ]
+  //           },
+  //           {
+  //             playerID : 0,
+  //             deltas : [
+  //               {x : 2, y: 0, objectID : 2},
+  //               {x : 2, y: 1, objectID : 2}
+  //             ]
+  //           },
+  //           {
+  //             playerID : 1,
+  //             deltas : [
+  //               {x : 4, y: 4, objectID : 3},
+  //               {x : 5, y: 5, objectID : 3}
+  //             ]
+  //           }
+  //         ],
+  //         winner : [0]
+  //       };
 
 %style  
   :sass
@@ -87,6 +90,7 @@
       background: -moz-linear-gradient( center top, #9FC8DB, #5D747F)
       background-color: #ccc
       border: 1px solid
+      width: 100%
     h1
       font-size: 40px
     label

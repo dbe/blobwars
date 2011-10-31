@@ -1,6 +1,8 @@
 BlobWars = (function() {
   var idealResolution = {x : 600, y: 600};
   var colors = ['white', 'black', 'green', 'blue', 'red', 'purple'];
+  var playerMap = ["Brian", "Danny", "Michel", "Gareth"];
+  counter = 0;
   
   
   function validGameHistory(gameHistory) {
@@ -76,6 +78,17 @@ BlobWars = (function() {
       context.fillStyle = colors[delta.objectID];
       if(!spaceIsEmpty(delta.x, delta.y))
       {
+        var offset = $('canvas').offset();
+        $('body').append('<p id=' + counter + ' style="font-weight: bold;">capture!</p>');
+        $('#' + counter).css({'position': 'fixed', 'left' : offset.left + (delta.x * scalingFactor.x), 'top' : offset.top + (delta.y * scalingFactor.y), 'z-index' : 100});
+        $('#' + counter).animate({
+          left: '-=20',
+          top: '-=20',
+          opacity: 0
+        }, 500, function(e) {
+          $(this).remove();
+        });
+        counter++;
         console.log("Would have shown capture animation");
       }
       context.fillRect(delta.x * scalingFactor.x, delta.y * scalingFactor.y, scalingFactor.x, scalingFactor.y);
@@ -93,8 +106,15 @@ BlobWars = (function() {
       return (data[0] + data[1] + data[2] === 765) || (data[3] == 0)
     }
     
+    //Get this out of the JS file!
+    var displayPlayerName = function(turn) {
+      $('#player-name').html(playerMap[turn.playerID]);
+      $('#player-name').css('color', colors[turn.playerID + 2])
+    }
+    
     var playTurn = function(onComplete) {
       var turn = gameHistory.turns[currentTurn - 1];
+      displayPlayerName(turn);
       animateDeltas(turn.deltas, delayBetweenDeltas, onComplete)
     }
     
@@ -112,12 +132,17 @@ BlobWars = (function() {
       }
       else
       {
+        $('#player-header').html("Winner:");
+        $('#player-name').html(playerMap[gameHistory.winner[0]]);
+        $('#player-name').css('color', colors[gameHistory.winner[0] + 2])
+        
         console.log("Finished");
       }
     }
     
     this.playFromBeginning = function() {
       clearBoard();
+      $('#player-header').html("Player:");
       currentTurn = 1;
       play();
     }
@@ -140,10 +165,10 @@ BlobWars = (function() {
   
   return {
     //Returns new Viewer object for the view to use
-    initialize : function(gameHistory, divID) {
+    initialize : function(gameHistory, canvasDivID) {
       if(!validGameHistory){return false};
       var scalingFactor = getScalingFactor(gameHistory.dimensions);
-      canvas = constructCanvasElement(gameHistory.dimensions, scalingFactor, divID);
+      canvas = constructCanvasElement(gameHistory.dimensions, scalingFactor, canvasDivID);
       return new Viewer(canvas, gameHistory, scalingFactor);
     }
   }  
