@@ -55,7 +55,7 @@ BlobWars = (function() {
     //setInterval(function(){console.log(renderQueue.queue)},50);
     var currentTurn = 1;
     var delayBetweenTurns = 20;
-    var delayBetweenDeltas = 1;
+    var delayBetweenDeltas = 15;
     
     function animateDeltas(deltas, delay, onComplete) {
       var timeNow = new Date().getTime();
@@ -133,8 +133,8 @@ BlobWars = (function() {
       else
       {
         $('#player-header').html("Winner:");
-        $('#player-name').html(playerMap[gameHistory.winner[0]]);
-        $('#player-name').css('color', colors[gameHistory.winner[0] + 2])
+        $('#player-name').html(playerMap[gameHistory.winners[0]]);
+        $('#player-name').css('color', colors[gameHistory.winners[0] + 2])
         
         console.log("Finished");
       }
