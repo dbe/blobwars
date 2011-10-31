@@ -53,7 +53,7 @@ BlobWars = (function() {
     //setInterval(function(){console.log(renderQueue.queue)},50);
     var currentTurn = 1;
     var delayBetweenTurns = 20;
-    var delayBetweenDeltas = 1;
+    var delayBetweenDeltas = 15;
     
     function animateDeltas(deltas, delay, onComplete) {
       var timeNow = new Date().getTime();
