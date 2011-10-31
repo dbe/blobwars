@@ -66,7 +66,7 @@ class GameRunner
       }
       end, 
       :dimensions => {:x => width, :y => height}, 
-      :winner => winners
+      :winners => winners
     }
 
   end

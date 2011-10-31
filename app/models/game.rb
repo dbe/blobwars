@@ -51,9 +51,10 @@ class Game < ActiveRecord::Base
     load "#{RUNNER_FOLDER}/#{self.game_runner_klass}.rb"
     game_runner = Object.const_get(self.game_runner_klass.classify).new
     
+    current_id = -1;
     clients = ais.map do |ai|
       # create a blank object for this player.
-      AiBase.new(ai.id).tap{|o| o.class_eval ai.logic }
+      AiBase.new(current_id += 1).tap{|o| o.class_eval ai.logic }
     end
     self.move_history = game_runner.play(clients, self.width, self.height)
     game_plays.where(:ai_id => move_history[:winner]).each{|winner| winner.update_attribute(:winner => true)}

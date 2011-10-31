@@ -133,8 +133,8 @@ BlobWars = (function() {
       else
       {
         $('#player-header').html("Winner:");
-        $('#player-name').html(playerMap[gameHistory.winner[0]]);
-        $('#player-name').css('color', colors[gameHistory.winner[0] + 2])
+        $('#player-name').html(playerMap[gameHistory.winners[0]]);
+        $('#player-name').css('color', colors[gameHistory.winners[0] + 2])
         
         console.log("Finished");
       }
