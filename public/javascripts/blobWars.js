@@ -79,7 +79,7 @@ BlobWars = (function() {
       if(!spaceIsEmpty(delta.x, delta.y))
       {
         var offset = $('canvas').offset();
-        $('body').append('<p id=' + counter + ' style="font-weight: bold;">capture!</p>');
+        $('body').append('<p id=' + counter + ' style="font-weight: bold;color:black;"></p>');
         $('#' + counter).css({'position': 'fixed', 'left' : offset.left + (delta.x * scalingFactor.x), 'top' : offset.top + (delta.y * scalingFactor.y), 'z-index' : 100});
         $('#' + counter).animate({
           left: '-=20',
