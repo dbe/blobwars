@@ -14,6 +14,7 @@ class GameRunner
  
     while !@game_state.over do
       @game_state.players.each do |player|
+        @game_state.current_player = player
         # Player takes a turn
         turn = Turn.new(player.team)
         @game_state.board.deltas = []         # Does the board need to own the deltas? Can we keep this with turn?
