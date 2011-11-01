@@ -19,7 +19,8 @@ class GameRunner
         @game_state.board.deltas = []         # Does the board need to own the deltas? Can we keep this with turn?
       
         # Get player move
-        move = player.get_move(@game_state)
+        x,y = *player.get_move(@game_state)
+        move = Move.new(x,y,player.team)
 
         # Validate move
         if move != nil && GameUtils.valid?(@game_state, move)
