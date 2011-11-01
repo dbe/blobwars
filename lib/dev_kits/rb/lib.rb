@@ -2,7 +2,7 @@ $stdout.sync = true
 
 BLANK = 0
 WALL = 1
-ME = ARGV[0]
+ME = ARGV[0].to_i
 
 module BlobWars
   class IO
@@ -16,7 +16,7 @@ module BlobWars
     end
   
     private
-    def tokenize_input_string(string)
+    def self.tokenize_input_string(string)
       {:width => (width = (array = string.split(',').map! {|ele| ele.to_i}).shift), :height => (height = array.shift), :board => Array.new(width){|i| array.slice!(0,height)}}
     end
   end
@@ -24,9 +24,9 @@ module BlobWars
   class GameState 
     attr_reader :width, :height, :board
     def initialize(hash)
-      @width = hash.width
-      @height = hash.height
-      @board = hash.board
+      @width = hash[:width]
+      @height = hash[:height]
+      @board = hash[:board]
     end
   
     def self.get

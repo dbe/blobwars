@@ -14,7 +14,7 @@ class Player
   def get_move(game_state)
     raise "Get move is abstract and must be overridden"
   end
-
+  
   # Provides the list of all moves from one position
   def get_possible_moves(game_state, position)
     position_list = []
@@ -26,7 +26,7 @@ class Player
     end
     position_list
   end
-
+  
   # Provides all the possible moves available for the player
   def get_all_possible_moves(game_state)
     territory_list = get_team_territories(game_state, @team)
@@ -36,12 +36,12 @@ class Player
     end
     position_list
   end
-
+  
   # Provides the list of all territories for the specified team
   def get_team_territories(game_state, team)
     territory_list = []
-    (0..game_state.board.width).each do |i| 
-      (0..game_state.board.height).each do |j|
+    (0...game_state.board.width).each do |i| 
+      (0...game_state.board.height).each do |j|
         if game_state.board.same_player?(i, j, team)
           territory_list << Move.new(i, j, team) 
         end
@@ -51,7 +51,6 @@ class Player
   end
 
   private
-  
   def add_direction(move, direction)
     Move.new(move.x + direction.x, move.y + direction.y, move.team)
   end

@@ -8,8 +8,8 @@ module GameUtils
     scores = Hash.new
     scores.default = 0
     # Count the number of tiles for each player
-    (0..game_state.board.width).each do |i|
-      (0..game_state.board.height).each do |j|
+    (0...game_state.board.width).each do |i|
+      (0...game_state.board.height).each do |j|
         scores[game_state.board.at(i,j)] += 1 if game_state.board.player?(i,j)
       end
     end
@@ -61,8 +61,8 @@ module GameUtils
     # the takes of the player whose turn it is
     takes = []
     board = game_state.board
-    (0..board.width).each do |i|
-      (0..board.height).each do |j|
+    (0...board.width).each do |i|
+      (0...board.height).each do |j|
         if board.player?(i, j) 
           next if current_player && board.same_player?(i, j, game_state.current_player.team)
           takes << Coordinate.new(i, j) if surrounded?(game_state, i, j)
