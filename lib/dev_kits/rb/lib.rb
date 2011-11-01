@@ -21,7 +21,7 @@ module BlobWars
     end
   end
 
-  class GameState 
+  class GameState
     attr_reader :width, :height, :board
     def initialize(hash)
       @width = hash[:width]
@@ -32,7 +32,7 @@ module BlobWars
     def self.get
       loop do
         IO.send_move(*(yield IO.read_game_state))
-      end
+      end rescue EOFError
     end
   end
 end
