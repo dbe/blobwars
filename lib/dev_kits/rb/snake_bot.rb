@@ -37,10 +37,10 @@ module BlobWars
     end
 
     def adjacency?(move)
-      same_player?(move.x + 1, move.y, move.team) ||
-      same_player?(move.x - 1, move.y, move.team) ||
-      same_player?(move.x, move.y + 1, move.team) ||
-      same_player?(move.x, move.y - 1, move.team)
+      same_player?(move.x + 1, move.y, ME) ||
+      same_player?(move.x - 1, move.y, ME) ||
+      same_player?(move.x, move.y + 1, ME) ||
+      same_player?(move.x, move.y - 1, ME)
     end
   end
 end
