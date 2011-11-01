@@ -20,6 +20,10 @@ class Board
   attr_reader :height, :width
   attr_accessor :deltas
   
+  def clone
+    
+  end
+  
   def at(x,y)
     # Make sure we are in border
     return nil if x < 0 || x >= @width
