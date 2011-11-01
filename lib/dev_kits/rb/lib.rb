@@ -1,4 +1,9 @@
 $stdout.sync = true
+
+BLANK = 0
+WALL = 1
+ME = ARGV[0]
+
 module BlobWars
   class IO
     #returns GameState object
