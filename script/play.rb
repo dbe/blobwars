@@ -26,9 +26,7 @@ end
 
 output = GameRunner.new.play(ais, WIDTH.to_i, HEIGHT.to_i).to_json
 
-ais.each do |ai|
-  ai.ai.close
-end
+
 File.open("loltestsite.html", "w+") do |f|
 f.puts <<-website
 
@@ -292,4 +290,10 @@ BlobWars = (function() {
 </body>
 </html>
 website
+end
+
+puts "Produced game."
+
+ais.each do |ai|
+  ai.ai.close
 end
