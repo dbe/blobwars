@@ -15,6 +15,7 @@ class IO(object):
   def send_move(x,y):
     """Send your move for turn"""
     print("%d,%d" % (x, y))
+    sys.stdout.flush()
   
   @staticmethod
   def tokenize_input_string(string):
