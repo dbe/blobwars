@@ -1,5 +1,5 @@
-require 'lib'
-require 'sample_toolkit'
+require 'lib/dev_kits/rb/lib'
+require 'lib/dev_kits/rb/sample_toolkit'
 
 class SnakeBot < BlobWars::SampleBotBase
   def initialize
