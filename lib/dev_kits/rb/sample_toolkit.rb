@@ -1,7 +1,10 @@
 require 'lib'
 
+# Extend GameState class to add our own methods
 module BlobWars
   class GameState
+    
+    ALL_DIRECTIONS = [Coordinate.new(0,1), Coordinate.new(0,-1), Coordinate.new(1,0), Coordinate.new(-1,0)]
     
     def at(x,y)
       # Make sure we are in border
@@ -21,7 +24,7 @@ module BlobWars
     end
 
     def player?(x,y)
-      !wall?(x, y) && !available?(x, y)
+      at(x, y) != nil && !wall?(x, y) && !available?(x, y)
     end
 
     def same_player?(x,y,team)
@@ -37,60 +40,39 @@ module BlobWars
     end
 
     def adjacency?(move)
-      same_player?(move.x + 1, move.y, ME) ||
-      same_player?(move.x - 1, move.y, ME) ||
-      same_player?(move.x, move.y + 1, ME) ||
-      same_player?(move.x, move.y - 1, ME)
+      ALL_DIRECTIONS.each do |direction|
+        adjacent_cell = move + direction
+        true if same_player?(adjacent_cell.x, adjacent_cell.y, ME)
+      end
+      false
     end
   end
 end
-
-bot = SnakeBot.new
-
-
-BlobWars::GameState.get do |game_state|
-  #Do logic, and set x and y variables of your intended move
-  
-  coord = bot.get_move(game_state)
-  
-  [coord.x,coord.y]
-end
-
 
 class Coordinate
   def initialize(x, y)
     @x = x
     @y = y
   end
+  
+  def +(coord)
+    return Coordinate.new(x + coord.x, y + coord.y)
+  end
 
   attr_accessor :x, :y
 end
 
-class SnakeBot
-  ALL_DIRECTIONS = [Coordinate.new(0,1), Coordinate.new(0,-1), Coordinate.new(1,0), Coordinate.new(-1,0)]
-  
-  attr_reader :team
-  
-  def initialize
-    @team = ME
-    @current_position = nil
-  end
+class SampleBotBase
   
   def get_move(game_state)
-    if @current_position == nil || get_possible_moves(game_state, @current_position).empty?
-      possible_moves = get_all_possible_moves(game_state)
-      @current_position = possible_moves[rand(possible_moves.size)]
-    else
-      @current_position = get_possible_moves(game_state, @current_position)[0]
-    end
-    @current_position
+    # Implement this method in derived sample
   end
 
   # Provides the list of all moves from one position
   def get_possible_moves(game_state, position)
     position_list = []
-    ALL_DIRECTIONS.each do |direction|
-      move = add_direction(position, direction)
+    game_state.ALL_DIRECTIONS.each do |direction|
+      move = position + direction
       if game_state.valid?(move)
         position_list << move
       end
@@ -111,8 +93,8 @@ class SnakeBot
   # Provides the list of all territories for the specified team
   def get_territories(game_state)
     territory_list = []
-    (0..game_state.width).each do |i| 
-      (0..game_state.height).each do |j|
+    (0...game_state.width).each do |i| 
+      (0...game_state.height).each do |j|
         if game_state.same_player?(i, j)
           territory_list << Coordinate.new(i, j) 
         end
@@ -121,9 +103,4 @@ class SnakeBot
     territory_list
   end
 
-  private
-  
-  def add_direction(move, direction)
-    Coordinate.new(move.x + direction.x, move.y + direction.y)
-  end
 end
