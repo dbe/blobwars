@@ -86,7 +86,6 @@ module BlobWars
     # Provides all the possible moves available for the player
     def get_all_possible_moves(game_state)
       territory_list = get_territories(game_state, ME)
-      puts territory_list.inspect
       position_list = []
       territory_list.each do |position|
         position_list.concat(get_possible_moves(game_state, position))
