@@ -1,5 +1,5 @@
-require 'lib'
-require 'sample_toolkit'
+require 'lib/dev_kits/rb/lib'
+require 'lib/dev_kits/rb/sample_toolkit'
 
 class RandomBot < BlobWars::SampleBotBase
   
@@ -17,5 +17,4 @@ BlobWars::GameState.get do |game_state|
   coord = bot.get_move(game_state) || BlobWars::Coordinate::INVALID
 
   [coord.x,coord.y]
-
 end
