@@ -9,7 +9,10 @@ class IO(object):
   @staticmethod
   def read_game_state(gs_cls):
     """Return the game state object read from the standard input"""
-    return gs_cls(IO.tokenize_input_string(sys.stdin.readline()))
+    try:
+      return gs_cls(IO.tokenize_input_string(sys.stdin.readline()))
+    except ValueError:
+      return None
 
   @staticmethod
   def send_move(x,y):
@@ -39,7 +42,11 @@ class GameState(object):
   @classmethod
   def get(cls):
     while True:
-      yield IO.read_game_state(cls)
+      gs = IO.read_game_state(cls)
+      if gs:
+        yield gs
+      else:
+        break
 
   @staticmethod
   def send_move(x, y):
