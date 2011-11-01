@@ -53,6 +53,10 @@ class Board
      set(x, y, @team_2_object_id[team])
   end
   
+  def to_comma_seperated_string
+    "#{width},#{height},#{@board.map{|row| row.join(',')}.join(',')}"
+  end
+  
   private
   
   def set(x,y,object_id)
