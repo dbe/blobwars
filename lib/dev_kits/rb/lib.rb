@@ -28,7 +28,9 @@ class GameState
   end
   
   def self.get
-    IO.send_move(*(yield IO.read_game_state))
+    loop do
+      IO.send_move(*(yield IO.read_game_state))
+    end
   end
 end
 
