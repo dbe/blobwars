@@ -29,7 +29,7 @@ class GameRunner
           @game_state.board.player!(move.x, move.y, move.team)    # Maybe rename this? What does player! mean here?
 
           # Handle any takes
-          GameUtils::handle_takes!(@game_state, turn)
+          GameUtils::handle_takes!(@game_state, move, turn)
         else
           @game_state.player_passed
         end
@@ -44,7 +44,7 @@ class GameRunner
       # Rotate turn
       @game_state.rotate_turn!
     end
-    
+
     {:turns => @game_state.game_history.map {|turn| {:playerID => turn.team, :deltas => turn.deltas.map {|delta| {:x => delta.x, :y => delta.y, :objectID => delta.object_id}}}}, 
     :dimensions => {:x => width, :y => height}, 
     :winners => GameUtils::find_winners(@game_state)}

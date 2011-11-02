@@ -33,43 +33,43 @@ module GameUtils
     game_state.board.same_player?(move.x, move.y - 1, move.team)
   end
   
-  def self.handle_takes!(game_state, turn)
+  def self.handle_takes!(game_state, move, turn)
     # First we resolve all the current player takes
+    move_list = Set.new [move]
+    all_moves = Set.new []
+    
     begin
-      takes = handle_player_takes!(game_state, turn, true)
-    end while takes.size > 0
+      all_moves += move_list
+      move_list = handle_player_takes!(game_state, move_list, turn)
+    end while !move_list.empty?
     
     # Then we create walls if other players can take back
-    handle_player_takes!(game_state, turn, false)
+    all_moves.each do |take|
+      game_state.board.wall!(take.x, take.y) if surrounded?(game_state, take.x, take.y)
+    end
   end
   
-  def self.handle_player_takes!(game_state, turn, current_player)
-    takes = find_takes(game_state, current_player)
+  def self.handle_player_takes!(game_state, move_list, turn)
+    takes = find_takes(game_state, move_list)
     takes.each do |take|
-      if current_player
-        game_state.board.player!(take.x, take.y, game_state.current_player.team)
-      else
-        game_state.board.wall!(take.x, take.y)
-      end
+      game_state.board.player!(take.x, take.y, game_state.current_player.team)
     end
-    
     takes
   end
   
-  def self.find_takes(game_state, current_player)
-    # current_player: whether or not we're looking for
-    # the takes of the player whose turn it is
+  def self.find_takes(game_state, move_list)
     takes = []
     board = game_state.board
-    (0...board.width).each do |i|
-      (0...board.height).each do |j|
-        if board.player?(i, j) 
-          next if current_player && board.same_player?(i, j, game_state.current_player.team)
-          takes << Coordinate.new(i, j) if surrounded?(game_state, i, j)
-        end
+    move_list.each do |move|
+      -1.upto(1) do |i|
+        -1.upto(1) do |j|
+          c_x, c_y = move.x + i, move.y + j
+          if board.player?(c_x, c_y) && !board.same_player?(c_x, c_y, game_state.current_player.team)
+            takes << Coordinate.new(c_x, c_y) if surrounded?(game_state, c_x, c_y)
+          end
+        end  
       end
     end
-    
     takes
   end
   
@@ -80,8 +80,7 @@ module GameUtils
     
     -1.upto(1) do |i|
       -1.upto(1) do |j|
-        c_x = x + i
-        c_y = y + j
+        c_x, c_y = x + i, y + j
         s_object_id = game_state.board.at(c_x, c_y)
         if game_state.board.player?(c_x, c_y) && object_id != s_object_id && s_object_id != nil
           counts[s_object_id] += 1
