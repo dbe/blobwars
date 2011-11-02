@@ -9,7 +9,7 @@ class SnakeBot(SampleBotBase):
     if not self._current_position or not self.get_possible_moves(game_state, self._current_position):
       possible_moves = self.get_all_possible_moves(game_state)
       if possible_moves:
-        self._current_position = possible_moves[randint(0, len(possible_moves))]
+        self._current_position = possible_moves[randint(0, len(possible_moves) - 1)]
     else:
       self._current_position = self.get_possible_moves(game_state, self._current_position)[0]
     return self._current_position
